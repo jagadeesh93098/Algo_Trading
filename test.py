@@ -2,7 +2,7 @@ import yfinance as yf
 from datetime import datetime, timedelta
 
 # Calculate the start date as 30 days ago from today
-e_d=datetime.today()-timedelta(days=1)
+e_d = datetime.today()-timedelta(days=1)
 end_date = e_d.strftime('%Y-%m-%d')
 start_date = (e_d - timedelta(days=1)).strftime('%Y-%m-%d')
 
