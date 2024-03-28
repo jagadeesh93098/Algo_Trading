@@ -26,14 +26,6 @@ def my_data(s):
 
     return df
 
-jiofin_data=my_data("JIOFIN.NS")
-
-jiofin_data
-
-nifty_data=my_data("^NSEI")
-
-nifty_data
-
 def my_day_change(df):
     df_temp=df.copy()
     df_temp.reset_index(inplace=True)
@@ -42,20 +34,21 @@ def my_day_change(df):
     return df_temp
 
 
+l=['JIOFIN.NS','JSWINFRA.NS','IREDA.NS','TATAPOWER.NS','UNIONBANK.NS','EMIL.NS','L&TFH.NS']
 
 
-jiofin_data=my_day_change(jiofin_data)
+for i in l:
+    s_data=my_day_change(my_data(i))
+    nifty_data=my_day_change(my_data("^NSEI"))
+    jiofin_data=jiofin_data.loc[jiofin_data['Datetime'].isin(nifty_data['Datetime'])].copy()
+    nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:].copy()
 
-nifty_data=my_day_change(nifty_data)
+
+
 
 jiofin_data=jiofin_data.loc[jiofin_data['Datetime'].isin(nifty_data['Datetime'])].copy()
 
-jiofin_data
-
 nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:].copy()
-
-nifty_data
-
 
 from sklearn.linear_model import LinearRegression
 
