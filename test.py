@@ -103,9 +103,8 @@ beta_p_d
 
 beta_p_m
 
-r_f=-1+(1+0.07)**(1/365)
+r_f=(((1+0.07)**(1/365))-1)**(29-18)
 
-((1+r_f)**(30)-1)*100
 
 nifty_data=my_day_change(my_data_min("^NSEI"))
 
@@ -114,6 +113,8 @@ nifty_data=nifty_data.loc[nifty_data['Datetime']>pd.Timestamp("2024-03-18",tz="A
 
 nifty_data.reset_index(inplace=True,drop=True)
 
-(nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nifty_data.loc[0,"Open"]
+r_m=(nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nifty_data.loc[0,"Open"]
 
-alpha=
+r_p=0.0317
+
+r_p-r_f-beta_p_m*(r_m-r_f)
