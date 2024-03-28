@@ -34,10 +34,6 @@ nifty_data=my_data("^NSEI")
 
 nifty_data
 
-jiofin_data
-
-nifty_data
-
 def my_day_change(df):
     df_temp=df.copy()
     df_temp.reset_index(inplace=True,drop=True)
@@ -48,7 +44,11 @@ def my_day_change(df):
 
 jiofin_data=my_day_change(jiofin_data)
 
+jiofin_data
+
 nifty_data=my_day_change(nifty_data)
+
+nifty_data
 
 
 np.stack((jiofin_data['day_change_pu'],nifty_data['day_change_pu']),axis=1)
