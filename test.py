@@ -47,7 +47,7 @@ def my_day_change(df):
 
 l=["IREDA.NS","JSWINFRA.NS","JIOFIN.NS","TATAPOWER.NS","UNIONBANK.NS","EMIL.NS","L&TFH.NS"]
 
-v=[14900,18295,14685,38325,26445,67600,23785+9570]
+v=[39850,33355,67600,38325,14685,18295,14900]
 
 from sklearn.linear_model import LinearRegression
 
