@@ -43,7 +43,6 @@ def my_day_change(df):
     df_temp['day_change_pu']=round(df_temp['day_change']*100/df_temp['Open'],8)
     return df_temp
 
-
 l=["IREDA.NS","JSWINFRA.NS","JIOFIN.NS","TATAPOWER.NS","UNIONBANK.NS","EMIL.NS","L&TFH.NS"]
 
 v=[39850,33355,67600,38325,14685,18295,14900]
