@@ -55,6 +55,4 @@ nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:
 nifty_data
 
 
-a=np.stack((jiofin_data['day_change_pu'],nifty_data['day_change_pu']),axis=0)
 
-np.cov(a)
