@@ -77,6 +77,9 @@ for i in range(0,len(w)):
 
 beta_p_m
 
+my_data_day('EMIL.NS')
+
+my_data_day('^NSEI')
 
 for i in l:
     s_data=my_day_change(my_data_day(i))
