@@ -49,7 +49,9 @@ def my_data_day(s):
 
     return df
 
-df = yf.download(, start=start_date, end=end_date, interval="1h")
+df = yf.download("JIOFIN.NS", start='2023-12-01', end="2024-02-1", interval="1d")
+
+df
 
 my_data_day("JIOFIN.NS")
 
