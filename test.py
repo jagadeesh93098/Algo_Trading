@@ -36,7 +36,7 @@ nifty_data
 
 def my_day_change(df):
     df_temp=df.copy()
-    df_temp.reset_index(inplace=True,drop=True)
+    df_temp.reset_index(inplace=True)
     df_temp['day_change']=df_temp['Close']-df_temp['Open']
     df_temp['day_change_pu']=round(df_temp['day_change']/df_temp['Open'],8)
     return df_temp
