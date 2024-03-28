@@ -105,9 +105,11 @@ beta_p_m
 
 r_f=-1+(1+0.07)**(1/365)
 
+((1+r_f)**(30)-1)*100
+
 nifty_data=my_day_change(my_data_min("^NSEI"))
 
 
 (nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nifty_data.loc[0,"Open"]
 
-r_f
+
