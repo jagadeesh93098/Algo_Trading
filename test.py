@@ -30,12 +30,15 @@ jiofin_data=my_data("JIOFIN.NS")
 
 nifty_data=my_data("^NSEI")
 
+jiofin_data
+
+nifty_data
 
 def my_day_change(df):
     df_temp=df.copy()
     df_temp.reset_index(inplace=True,drop=True)
     df_temp['day_change']=df_temp['Close']-df_temp['Open']
-    df_temp['day_change_pu']=round(df_temp['day_change']/df_temp['Open'],5)
+    df_temp['day_change_pu']=round(df_temp['day_change']/df_temp['Open'],8)
     return df_temp
 
 
@@ -43,4 +46,6 @@ jiofin_data=my_day_change(jiofin_data)
 
 nifty_data=my_day_change(nifty_data)
 
+
+np.stack((jiofin_data['day_change_pu'],nifty_data['day_change_pu']),axis=1)
 
