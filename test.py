@@ -112,7 +112,9 @@ r_m=(nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nif
 
 r_p=0.0326
 
-r_f=(((1+0.1)**(1/365))-1)**(29-13)
+r_f=(1+0.07)**((29-12)/365)
+
+r_f
 
 round(r_p-r_f-beta_p_m*(r_m-r_f),5)
 
