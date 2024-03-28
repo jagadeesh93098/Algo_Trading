@@ -109,4 +109,12 @@ r_f=-1+(1+0.07)**(1/365)
 
 nifty_data=my_day_change(my_data_min("^NSEI"))
 
+import datetime
+nifty_data['Datetime']>datetime.datetime.strptime("2024-03-18","%Y-%m-%d")
+
+
+datetime.datetime.strptime("2024-03-18","%Y-%m-%d")
+
 (nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nifty_data.loc[0,"Open"]
+
+alpha=
