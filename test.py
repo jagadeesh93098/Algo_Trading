@@ -33,7 +33,7 @@ for i in list(j.info.keys()):
 
 jiofin_data.reset_index(inplace=True,drop=True)
 
-jiofin_data['Day_Change']=jiofin_data['Close']-jiofin_data['Open']
-jiofin_data['Day_Change_%']=round(jiofin_data['Day_Change']/jiofin_data['Open'],5)
+jiofin_data['day_change']=jiofin_data['Close']-jiofin_data['Open']
+jiofin_data['Day_Change']=round(jiofin_data['Day_Change']/jiofin_data['Open'],5)
 
 jiofin_data
