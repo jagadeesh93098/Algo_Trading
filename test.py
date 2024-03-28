@@ -23,5 +23,6 @@ for i in range(0,3):
 
 
 j=yf.Ticker('JIOFIN.NS')
-list(j.info.keys())
+for i in list(j.info.keys()):
+    print(i)
 
