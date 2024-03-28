@@ -28,7 +28,11 @@ def my_data(s):
 
 jiofin_data=my_data("JIOFIN.NS")
 
+jiofin_data
+
 nifty_data=my_data("^NSEI")
+
+nifty_data
 
 jiofin_data
 
