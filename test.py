@@ -26,6 +26,5 @@ for i in range(0,3):
 
 j=yf.Ticker('^NSEI')
 for i in list(j.info.keys()):
-    if "open" in i:
+    if "beta"in i:
         print(i)
-
