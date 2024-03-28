@@ -2,6 +2,8 @@ import yfinance as yf
 from datetime import datetime, timedelta
 import pandas as pd
 
+# Goal is Calculate Beta of Stocks as I've Entered and Exited my Stake in Them. For Estimating the Expected Returns.
+
 # Calculate the start date as 30 days ago from today
 e_d = datetime.today()-timedelta(days=1)
 end_date = e_d.strftime('%Y-%m-%d')
