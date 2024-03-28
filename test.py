@@ -37,7 +37,7 @@ def my_data_day(s):
     # Fetch historical intraday data for Jio Platforms Limited for the last 30 days
     df = yf.download(s, start=start_date, end=end_date, interval="1d")
 
-    for i in range(0,1):
+    for i in range(0,0):
         e_d=s_d
         end_date = e_d.strftime('%Y-%m-%d')
         s_d = e_d - timedelta(days=7)
