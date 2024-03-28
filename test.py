@@ -22,8 +22,8 @@ for i in range(0,3):
     jiofin_data=pd.concat([df_temp,jiofin_data],axis=0)
 
 
-j=yf.Ticker('NSEI')
+j=yf.Ticker('^NSEI')
 for i in list(j.info.keys()):
-    if "day" in i:
+    if "open" in i:
         print(i)
 
