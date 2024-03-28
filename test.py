@@ -21,6 +21,3 @@ for i in range(0,3):
     df_temp = yf.download("JIOFIN.NS", start=start_date, end=end_date, interval="1m")
     jiofin_data=pd.concat([df_temp,jiofin_data],axis=0)
 
-print(jiofin_data.head())
-
-print(jiofin_data.tail())
