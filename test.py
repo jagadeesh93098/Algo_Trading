@@ -55,4 +55,18 @@ nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:
 nifty_data
 
 
+from sklearn.linear_model import LinearRegression
 
+import numpy as np
+
+Y=np.array(jiofin_data['day_change_pu'])
+
+X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
+
+model=LinearRegression().fit(X,Y)
+
+model.score(X,Y)
+
+model.coef_
+
+model.intercept_
