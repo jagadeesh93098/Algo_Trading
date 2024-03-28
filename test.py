@@ -42,6 +42,8 @@ def my_day_change(df):
     return df_temp
 
 
+
+
 jiofin_data=my_day_change(jiofin_data)
 
 nifty_data=my_day_change(nifty_data)
