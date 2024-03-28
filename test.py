@@ -26,7 +26,6 @@ def my_data_min(s):
 
     return df
 
-
 def my_data_day(s):
     # Calculate the start date as 30 days ago from today
     e=datetime.today()
@@ -52,7 +51,6 @@ v=[39850,33355,67600,38325,14685,18295,14900]
 from sklearn.linear_model import LinearRegression
 
 import numpy as np
-
 
 for i in l:
     s_data=my_day_change(my_data_min(i))
@@ -104,7 +102,6 @@ beta_p_d
 
 beta_p_m
 
-
 nifty_data=my_day_change(my_data_min("^NSEI"))
 
 import datetime
@@ -121,4 +118,3 @@ r_f=(((1+0.1)**(1/365))-1)**(29-13)
 round(r_p-r_f-beta_p_m*(r_m-r_f),5)
 
 sum(v)
-
