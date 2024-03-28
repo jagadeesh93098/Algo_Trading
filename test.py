@@ -4,7 +4,7 @@ import pandas as pd
 
 # Goal is Calculate Beta of Stocks as I've Entered and Exited my Stake in Them. For Estimating the Expected Returns.
 
-def my_data(s):
+def my_data_min(s):
     # Calculate the start date as 30 days ago from today
     e_d = datetime.today()-timedelta(days=1)
     end_date = e_d.strftime('%Y-%m-%d')
@@ -26,6 +26,29 @@ def my_data(s):
 
     return df
 
+
+def my_data_day(s):
+    # Calculate the start date as 30 days ago from today
+    e_d = datetime.today()-timedelta(days=1)
+    end_date = e_d.strftime('%Y-%m-%d')
+    s_d = e_d - timedelta(days=30)
+    start_date=s_d.strftime("%Y-%m-%d")
+
+    # Fetch historical intraday data for Jio Platforms Limited for the last 30 days
+    df = yf.download(s, start=start_date, end=end_date, interval="1d")
+
+    for i in range(0,3):
+        e_d=s_d
+        end_date = e_d.strftime('%Y-%m-%d')
+        s_d = e_d - timedelta(days=7)
+        start_date=s_d.strftime("%Y-%m-%d")
+
+        # Fetch historical intraday data for Jio Platforms Limited for the last 30 days
+        df_temp = yf.download(s, start=start_date, end=end_date, interval="1m")
+        df=pd.concat([df_temp,df],axis=0)
+
+    return df
+
 def my_day_change(df):
     df_temp=df.copy()
     df_temp.reset_index(inplace=True)
@@ -34,36 +57,59 @@ def my_day_change(df):
     return df_temp
 
 
-l=['JIOFIN.NS','JSWINFRA.NS','IREDA.NS','TATAPOWER.NS','UNIONBANK.NS','EMIL.NS','L&TFH.NS']
-
-
-for i in l:
-    s_data=my_day_change(my_data(i))
-    nifty_data=my_day_change(my_data("^NSEI"))
-    jiofin_data=jiofin_data.loc[jiofin_data['Datetime'].isin(nifty_data['Datetime'])].copy()
-    nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:].copy()
-
-
-
-
-jiofin_data=jiofin_data.loc[jiofin_data['Datetime'].isin(nifty_data['Datetime'])].copy()
-
-nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:].copy()
+l=['L&TFH.NS','EMIL.NS','UNIONBANK.NS','TATAPOWER.NS','IREDA.NS','JIOFIN.NS','JSWINFRA.NS']
+v=[14900,18295,14685,38325,26445,67600,23785+9570]
 
 from sklearn.linear_model import LinearRegression
 
 import numpy as np
 
-Y=np.array(jiofin_data['day_change_pu'])
 
-X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
+for i in l:
+    s_data=my_day_change(my_data_min(i))
+    nifty_data=my_day_change(my_data_min("^NSEI"))
+    s_data=s_data.loc[s_data['Datetime'].isin(nifty_data['Datetime'])].copy()
+    nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(s_data['Datetime']),:].copy()
+    Y=np.array(s_data['day_change_pu'])
+    X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
+    model=LinearRegression().fit(X,Y)
+    locals()['beta_{}'.format(i)]=model.coef_[0]
 
-model=LinearRegression().fit(X,Y)
+for i in l:
+    print("Beta of min by min {} = {}\n".format(i,locals()['beta_{}'.format(i)]))
 
-model.score(X,Y)
+w=[round(i/sum(v),4) for i in v]
 
-beta_j=model.coef_[0]
+b_m=[]
+for i in l:
+    b_m.append(locals()['beta_{}'.format(i)])
 
-beta_j
+beta_p_m=0
+for i in range(0,len(w)):
+    beta_p_m+=w[i]*b_m[i]
+
+beta_p_m
 
 
+for i in l:
+    s_data=my_day_change(my_data_day(i))
+    nifty_data=my_day_change(my_data_day("^NSEI"))
+    s_data=s_data.loc[s_data['Datetime'].isin(nifty_data['Datetime'])].copy()
+    nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(s_data['Datetime']),:].copy()
+    Y=np.array(s_data['day_change_pu'])
+    X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
+    model=LinearRegression().fit(X,Y)
+    locals()['beta_{}'.format(i)]=model.coef_[0]
+
+for i in l:
+    print("Beta of day by day {} = {}\n".format(i,locals()['beta_{}'.format(i)]))
+
+b_d=[]
+for i in l:
+    b_d.append(locals()['beta_{}'.format(i)])
+
+beta_p_d=0
+for i in range(0,len(w)):
+    beta_p_d+=w[i]*b_d[i]
+
+beta_p_d
