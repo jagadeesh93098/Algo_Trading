@@ -45,6 +45,12 @@ def my_day_change(df):
     return df_temp
 
 
+l=["IREDA","JSWINFRA","JIOFIN","TATAPOWER","UNIONBANK","EMIL","L&TFH"]
+
+for i in l:
+    print(i+".NS"+",",end="")
+
+
 l=['L&TFH.NS','EMIL.NS','UNIONBANK.NS','TATAPOWER.NS','IREDA.NS','JIOFIN.NS','JSWINFRA.NS']
 v=[14900,18295,14685,38325,26445,67600,23785+9570]
 
