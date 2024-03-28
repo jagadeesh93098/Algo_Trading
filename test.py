@@ -49,6 +49,9 @@ def my_data_day(s):
 
     return df
 
+
+my_data_day("JIOFIN.NS")
+
 def my_day_change(df):
     df_temp=df.copy()
     df_temp.reset_index(inplace=True)
