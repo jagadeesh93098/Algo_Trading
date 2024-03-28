@@ -29,9 +29,10 @@ def my_data_min(s):
 
 def my_data_day(s):
     # Calculate the start date as 30 days ago from today
-    start_date="2023-01-01"
     e=datetime.today()
     end_date=e.strftime("%Y-%m-%d")
+    s=e-timedelta(years=5)
+    start_date=s.strftime("%Y-%m-%d")
     # Fetch historical intraday data for Jio Platforms Limited for the last 30 days
     df = yf.download(s, start=start_date, end=end_date, interval="1d")
     return df
@@ -60,16 +61,16 @@ for i in l:
     Y=np.array(s_data['day_change_pu'])
     X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
     model=LinearRegression().fit(X,Y)
-    locals()['beta_{}'.format(i)]=model.coef_[0]
+    locals()['beta_m_{}'.format(i)]=model.coef_[0]
 
 for i in l:
-    print("Beta of min by min {} = {}\n".format(i,locals()['beta_{}'.format(i)]))
+    print("Beta of min by min {} = {}\n".format(i,locals()['beta_m_{}'.format(i)]))
 
 w=[round(i/sum(v),4) for i in v]
 
 b_m=[]
 for i in l:
-    b_m.append(locals()['beta_{}'.format(i)])
+    b_m.append(locals()['beta_m_{}'.format(i)])
 
 beta_p_m=0
 for i in range(0,len(w)):
@@ -77,26 +78,22 @@ for i in range(0,len(w)):
 
 beta_p_m
 
-my_data_day('EMIL.NS')
-
-my_data_day('^NSEI')
-
 for i in l:
     s_data=my_day_change(my_data_day(i))
     nifty_data=my_day_change(my_data_day("^NSEI"))
-    s_data=s_data.loc[s_data['Datetime'].isin(nifty_data['Datetime'])].copy()
-    nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(s_data['Datetime']),:].copy()
+    s_data=s_data.loc[s_data['Date'].isin(nifty_data['Date'])].copy()
+    nifty_data=nifty_data.loc[nifty_data['Date'].isin(s_data['Date']),:].copy()
     Y=np.array(s_data['day_change_pu'])
     X=np.array(nifty_data['day_change_pu']).reshape(-1,1)
     model=LinearRegression().fit(X,Y)
-    locals()['beta_{}'.format(i)]=model.coef_[0]
+    locals()['beta_d_{}'.format(i)]=model.coef_[0]
 
 for i in l:
-    print("Beta of day by day {} = {}\n".format(i,locals()['beta_{}'.format(i)]))
+    print("Beta of day by day {} = {}\n".format(i,locals()['beta_d_{}'.format(i)]))
 
 b_d=[]
 for i in l:
-    b_d.append(locals()['beta_{}'.format(i)])
+    b_d.append(locals()['beta_d_{}'.format(i)])
 
 beta_p_d=0
 for i in range(0,len(w)):
@@ -105,3 +102,12 @@ for i in range(0,len(w)):
 beta_p_d
 
 beta_p_m
+
+r_f=-1+(1+0.07)**(1/365)
+
+nifty_data=my_day_change(my_data_min("^NSEI"))
+
+
+(nifty_data.loc[nifty_data.shape[0]-1,"Close"]-nifty_data.loc[0,"Open"])/nifty_data.loc[0,"Open"]
+
+r_f
