@@ -24,5 +24,6 @@ for i in range(0,3):
 
 j=yf.Ticker('JIOFIN.NS')
 for i in list(j.info.keys()):
-    print(i)
+    if "day" in i:
+        print(i)
 
