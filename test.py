@@ -28,3 +28,12 @@ j=yf.Ticker('^NSEI')
 for i in list(j.info.keys()):
     if "beta"in i:
         print(i)
+
+
+
+jiofin_data.reset_index(inplace=True,drop=True)
+
+jiofin_data['Day_Change']=jiofin_data['Close']-jiofin_data['Close']
+jiofin_data['Day_Change_%']=round(jiofin_data['Day_Change']*100/jiofin_data['Open'],5)
+
+jiofin_data
