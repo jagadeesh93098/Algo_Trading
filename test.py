@@ -20,4 +20,3 @@ for i in range(0,3):
     # Fetch historical intraday data for Jio Platforms Limited for the last 30 days
     df_temp = yf.download("JIOFIN.NS", start=start_date, end=end_date, interval="1m")
     jiofin_data=pd.concat([df_temp,jiofin_data],axis=0)
-
