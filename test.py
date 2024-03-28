@@ -44,12 +44,17 @@ def my_day_change(df):
 
 jiofin_data=my_day_change(jiofin_data)
 
+nifty_data=my_day_change(nifty_data)
+
+jiofin_data=jiofin_data.loc[jiofin_data['Datetime'].isin(nifty_data['Datetime'])].copy()
+
 jiofin_data
 
-nifty_data=my_day_change(nifty_data)
+nifty_data=nifty_data.loc[nifty_data['Datetime'].isin(jiofin_data['Datetime']),:].copy()
 
 nifty_data
 
 
-np.stack((jiofin_data['day_change_pu'],nifty_data['day_change_pu']),axis=1)
+a=np.stack((jiofin_data['day_change_pu'],nifty_data['day_change_pu']),axis=0)
 
+np.cov(a)
