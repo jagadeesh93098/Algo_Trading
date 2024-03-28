@@ -69,6 +69,8 @@ model=LinearRegression().fit(X,Y)
 
 model.score(X,Y)
 
-model.coef_
+beta_j=model.coef_[0]
 
-model.intercept_
+beta_j
+
+
