@@ -41,4 +41,6 @@ plt.savefig('output.png')
 import seaborn as sns
 
 sns.kdeplot(df.change_prev_close)
-plt.savefig('output.png')
+plt.savefig('output_1.png')
+
+plt.close('all')
