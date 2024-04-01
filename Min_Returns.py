@@ -40,4 +40,5 @@ plt.savefig('output.png')
 
 import seaborn as sns
 
-sns.distplot(a=df.change_prev_close)
+sns.kdeplot(df.change_prev_close)
+plt.savefig('output.png')
