@@ -16,7 +16,7 @@ def my_profit_prev_close(df):
     df.reset_index(inplace=True,drop=False)
     df.loc[:,"change_prev_close"]=0
     for i in range(1,df.shape[0]):
-        df.loc[i,'change_prev_close']=round((df.loc[i,'Close']-df.loc[i=1,'Close'])/df.loc[i-1,'Close'],5)
+        df.loc[i,'change_prev_close']=round((df.loc[i,'Close']-df.loc[i-1,'Close'])*100/df.loc[i-1,'Close'],5)
     return df
 
 
@@ -24,4 +24,6 @@ df=my_data_day("JIOFIN.NS")
 
 df=my_profit_prev_close(df)
 
-df
+df['change_prev_close'].loc[1:].mean()
+
+df['change_prev_close'].loc[1:].var()
