@@ -27,3 +27,8 @@ df=my_profit_prev_close(df)
 df['change_prev_close'].loc[1:].mean()
 
 df['change_prev_close'].loc[1:].var()
+
+import seaborn as sns
+sns.kdeplot(df.change_prev_close)
+plt.savefig('output1.png')
+plt.close('all')
