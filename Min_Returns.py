@@ -39,3 +39,5 @@ plt.plot([i for i in range(1,df.shape[0])],df['change_prev_close'].loc[1:])
 plt.savefig('output.png')
 
 import seaborn as sns
+
+sns.distplot(a=df.change_prev_close)
