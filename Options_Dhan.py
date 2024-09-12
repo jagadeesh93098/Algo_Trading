@@ -2,10 +2,12 @@ from dhanhq import marketfeed
 import pandas as pd
 import datetime
 
+{0:["MIDCAP"]}
+
 temp = datetime.date.today()
 print(datetime.date.today())
 
-datetime.datetime
+temp.weekday()
 
 
 
@@ -21,8 +23,11 @@ df['SEM_INSTRUMENT_NAME'].unique()
 
 instrument_name = 'OPTIDX'
 exch_id = 'BSE'
-symbol = 'SENSEX-'
+symbol = 'NIFTY'
 
+df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("NIFTY"),:]
+
+df.loc[(df['SM_SYMBOL_NAME'].str.contains('NIFTY')),:]
 
 
 def get_security_id(option_type,strike,undelying,date_of_expiry)
