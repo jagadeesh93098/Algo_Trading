@@ -62,6 +62,6 @@ import math
 I = 2000
 b = 0.15
 N = math.floor(I/(b*25))
-s = 118.5
+s = 69.0
 print(f'Profit = {(s-b)*N*25}')
 print(f'Quantity = {N*25}')
