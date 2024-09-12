@@ -40,7 +40,7 @@ df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty") == True
 
 df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty"),:]
 
-df.loc[(df['SM_SYMBOL_NAME'].str.contains('SELECT'))==True,['SM_SYMBOL_NAME','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
+df.loc[(df['SM_SYMBOL_NAME'].str.contains('MIDCAP'))==True,['SM_SYMBOL_NAME','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
 
 def get_security_id(option_type,strike,undelying,date_of_expiry)
 
