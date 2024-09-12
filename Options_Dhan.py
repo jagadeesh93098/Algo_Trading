@@ -60,7 +60,8 @@ data.disconnect()
 
 import math
 I = 2000
-b = 0.80
+b = 0.15
 N = math.floor(I/(b*25))
-s = 168.50
+s = 118.5
 print(f'Profit = {(s-b)*N*25}')
+print(f'Quantity = {N*25}')
