@@ -2,7 +2,7 @@ from dhanhq import marketfeed
 import pandas as pd
 import datetime
 
-option_dict = {0:["MIDCAP","BANKEX"],1:"FINNIFTY",2:"NIFTYBANK",3:"NIFTY50",4:"SENSEX"}
+option_dict = {0:["MIDCPNIFTY","BANKEX"],1:"FINNIFTY",2:"NIFTYBANK",3:"NIFTY50",4:"SENSEX"}
 
 temp = datetime.date.today()
 print(datetime.date.today())
@@ -36,11 +36,24 @@ instrument_name = 'OPTIDX'
 exch_id = 'BSE'
 symbol = 'NIFTY'
 
+df.columns
+
+df['SEM_INSTRUMENT_NAME'].unique()
+
 df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty") == True
 
 df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty"),:]
 
-df.loc[(df['SM_SYMBOL_NAME'].str.contains('MIDCAP'))==True,['SM_SYMBOL_NAME','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
+temp=df.loc[(df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_TRADING_SYMBOL'].str.contains('MIDCPNIFTY')),:].copy()
+temp.reset_index(inplace = True, drop = True)
+
+temp.loc[0,:]
+
+k = []
+for i in temp.loc[:,'SEM_TRADING_SYMBOL']:
+    k.append(i.split("-")[0])
+print(k)
+temp.loc[0,'SEM_TRADING_SYMBOL'].split("-")[0]
 
 def get_security_id(option_type,strike,undelying,date_of_expiry)
 
