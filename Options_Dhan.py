@@ -19,15 +19,17 @@ df.head()
 
 df.columns
 
-df['SEM_INSTRUMENT_NAME'].unique()
+df['SM_SYMBOL_NAME'].unique()
 
 instrument_name = 'OPTIDX'
 exch_id = 'BSE'
 symbol = 'NIFTY'
 
-df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("NIFTY"),:]
+df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty") == True
 
-df.loc[(df['SM_SYMBOL_NAME'].str.contains('NIFTY')),:]
+df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty"),:]
+
+df.loc[(df['SM_SYMBOL_NAME'].str.contains('NIFTY')) & (df['SM_SYMBOL_NAME'].str.contains('SELECT')),['SM_SYMBOL_NAME','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
 
 
 def get_security_id(option_type,strike,undelying,date_of_expiry)
