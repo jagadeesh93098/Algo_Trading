@@ -58,10 +58,3 @@ data.subscribe_symbols(instrument)
 data.get_data()
 data.disconnect()
 
-import math
-I = 3000
-b = 0.25
-N = math.floor(I/(b*25))
-s = 89
-print(f'Profit = {(s-b)*N*25}')
-print(f'Number of Lot = {N}. Quantity = {N*25}')
