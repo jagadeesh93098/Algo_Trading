@@ -57,3 +57,10 @@ data.run_forever()
 data.subscribe_symbols(instrument)
 data.get_data()
 data.disconnect()
+
+import math
+I = 2000
+b = 0.80
+N = math.floor(I/(b*25))
+s = 168.50
+print(f'Profit = {(s-b)*N*25}')
