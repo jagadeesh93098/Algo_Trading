@@ -1,6 +1,8 @@
 from dhanhq import marketfeed
 import pandas as pd
-import datettime
+import datetime
+
+print(datetime.datetime.date())
 
 
 
