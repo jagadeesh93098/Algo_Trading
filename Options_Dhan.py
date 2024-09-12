@@ -18,10 +18,7 @@ next_expiry
 
 
 def get_list_of_options(unde)
-
-
-
-
+    
 client_id = "1104088864"
 client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI2MTc4MzcwLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.tEheq0yFTPEWpKayI9Hp95sS8SjosYYIYZtMLZUjKqVbXFnnjWFUAUhPP5N3pZXRBYOOmnajiqDpnbXs0jWhvA"
 
@@ -69,4 +66,3 @@ data.run_forever()
 data.subscribe_symbols(instrument)
 data.get_data()
 data.disconnect()
-
