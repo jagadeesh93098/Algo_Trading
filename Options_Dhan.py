@@ -11,7 +11,7 @@ print(temp + datetime.timedelta(days = 7 - temp.weekday()))
 
 
 underlying = option_dict[1]
-next_expiry = datetime.datetime.strftime(temp + datetime.timedelta(days = 7 + 1 - temp.weekday()),'%d %m')
+next_expiry = datetime.datetime.strftime(temp + datetime.timedelta(days = 7 + 1 - temp.weekday()),'%d %b')
 next_expiry
 
 
