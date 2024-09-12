@@ -2,7 +2,7 @@ from dhanhq import marketfeed
 import pandas as pd
 import datetime
 
-print(datetime.datetime.date())
+print(datetime.date(datetime.datetime.today()))
 
 
 
