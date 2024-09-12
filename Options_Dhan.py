@@ -2,12 +2,23 @@ from dhanhq import marketfeed
 import pandas as pd
 import datetime
 
-{0:["MIDCAP"]}
+option_dict = {0:["MIDCAP","BANKEX"],1:"FINNIFTY",2:"NIFTYBANK",3:"NIFTY50",4:"SENSEX"}
 
 temp = datetime.date.today()
 print(datetime.date.today())
 
-temp.weekday()
+print(temp + datetime.timedelta(days = 7 - temp.weekday()))
+
+
+underlying = option_dict[1]
+next_expiry = datetime.datetime.strftime(temp + datetime.timedelta(days = 7 + 1 - temp.weekday()),'%d %m')
+next_expiry
+
+
+
+
+def get_list_of_options(unde)
+
 
 
 
@@ -31,7 +42,6 @@ df.loc[df['SEM_CUSTOM_SYMBOL'].str.contains("Nifty"),:]
 
 df.loc[(df['SM_SYMBOL_NAME'].str.contains('NIFTY')) & (df['SM_SYMBOL_NAME'].str.contains('SELECT')),['SM_SYMBOL_NAME','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
 
-def get_list_of_options()
 
 def get_security_id(option_type,strike,undelying,date_of_expiry)
 
