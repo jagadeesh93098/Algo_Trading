@@ -48,6 +48,14 @@ response
 data.disconnect()
 
 
+dhan.intraday_minute_data(
+    security_id='11536',
+    exchange_segment='NSE_EQ',
+    instrument_type='EQUITY'
+)
+
+
+
 
 
 
