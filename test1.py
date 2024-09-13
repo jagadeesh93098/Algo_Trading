@@ -10,8 +10,6 @@ access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5
 instruments = [(1, "1333",15),(0,"13",15)]
 subscription_code = marketfeed.Ticker
 
-
-
 # Usage Example
 async def on_connect(instance):
     print("Connected to websocket")
@@ -21,7 +19,7 @@ async def on_message(instance, message):
 
 print("Subscription code :", subscription_code)
 feed = marketfeed.DhanFeed(client_id, access_token, instruments)
-
-feed.run_forever()
+feed.disconnect()
+# feed.run_forever()
 
 asyncio.create_task(feed.run_forever())
