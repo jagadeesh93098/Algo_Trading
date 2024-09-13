@@ -43,7 +43,8 @@ instrument = [(0,'442',15)]
 data = marketfeed.DhanFeed(client_id, client_token, instrument)
 data.run_forever()
 data.subscribe_symbols(instrument)
-data.get_data()
+response = data.get_data()
+response
 data.disconnect()
 
 
