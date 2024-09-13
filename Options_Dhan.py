@@ -18,7 +18,14 @@ next_expiry.upper()
 
 
 df = pd.read_csv('api-scrip-master.csv')
+
 df.columns
+
+df.loc[(df['SEM_INSTRUMENT_NAME'] == 'INDEX') & (df['SEM_TRADING_SYMBOL'].str.contains(underlying.upper())),['SEM_SMST_SECURITY_ID','SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL']]
+
+df_underlying = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'INDEX') & df['SEM_CUSTOM_SYMBOL'].str.contains(underlying),:].copy()
+df_underlying
+
 df_option_chain = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_CUSTOM_SYMBOL'].str.contains(next_expiry.upper())) & (df['SEM_CUSTOM_SYMBOL'].str.contains(underlying)),['SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL','SEM_SMST_SECURITY_ID']].copy()
 df_option_chain.reset_index(inplace = True, drop = True)
 df_option_chain_call = df_option_chain.loc[df_option_chain['SEM_CUSTOM_SYMBOL'].str.contains('CALL'),:]
@@ -31,7 +38,7 @@ df_option_chain_call
 client_id = "1104088864"
 client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI3NTE5ODQzLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.XIKQpgBpDUa6CLjf67FjM-4c6lIfvURzU0Dob6RJIZUv3dyCmsZhXxiKMhSccdvCNdfPctU_vPSa6j8WclAfiA"
 
-instrument = [(0,'57726',15)]
+instrument = [(0,'442',15)]
 
 data = marketfeed.DhanFeed(client_id, client_token, instrument)
 data.run_forever()
