@@ -38,7 +38,7 @@ df_option_chain_call.loc[df_option_chain_call['STRIKE'] == 13000,:]
 client_id = "1104088864"
 client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI3NTE5ODQzLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.XIKQpgBpDUa6CLjf67FjM-4c6lIfvURzU0Dob6RJIZUv3dyCmsZhXxiKMhSccdvCNdfPctU_vPSa6j8WclAfiA"
 
-instrument = [(2,'64756',15)]
+instrument = [(2,'64756',17)]
 
 data = marketfeed.DhanFeed(client_id, client_token, instrument)
 data.run_forever()
