@@ -26,14 +26,14 @@ df.loc[(df['SEM_INSTRUMENT_NAME'] == 'INDEX') & (df['SEM_TRADING_SYMBOL'].str.co
 df_underlying = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'INDEX') & df['SEM_CUSTOM_SYMBOL'].str.contains(underlying),:].copy()
 df_underlying
 
-df_option_chain = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_CUSTOM_SYMBOL'].str.contains(next_expiry.upper())) & (df['SEM_CUSTOM_SYMBOL'].str.contains(underlying)),['SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL','SEM_SMST_SECURITY_ID']].copy()
+df_option_chain = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_CUSTOM_SYMBOL'].str.contains(next_expiry.upper())) & (df['SEM_CUSTOM_SYMBOL'].str.contains(underlying)),['SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL','SEM_SMST_SECURITY_ID','SEM_SEGMENT','SEM_EXCH_INSTRUMENT_TYPE']].copy()
 df_option_chain.reset_index(inplace = True, drop = True)
 df_option_chain_call = df_option_chain.loc[df_option_chain['SEM_CUSTOM_SYMBOL'].str.contains('CALL'),:]
 df_option_chain_call.reset_index(inplace = True, drop = True)
 df_option_chain_call['STRIKE'] = [int(i.split(' ')[-2]) for i in df_option_chain_call['SEM_CUSTOM_SYMBOL']]
 df_option_chain_call.sort_values(by = 'STRIKE', ascending = True,inplace = True)
 df_option_chain_call.reset_index(inplace = True, drop = True)
-df_option_chain_call
+df_option_chain_call.loc[df_option_chain_call['STRIKE'] == 13000,:]
 
 client_id = "1104088864"
 client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI3NTE5ODQzLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.XIKQpgBpDUa6CLjf67FjM-4c6lIfvURzU0Dob6RJIZUv3dyCmsZhXxiKMhSccdvCNdfPctU_vPSa6j8WclAfiA"
@@ -47,11 +47,11 @@ response = data.get_data()
 response
 data.disconnect()
 
-from dhan import dhanhq
+from dhanhq import dhanhq
 
 dhan = dhanhq(client_id,client_token)
 
-dhan.intraday_minute_data('')
+dhan.intraday_minute_data('64756','NSE_FNO','OPTIDX')
 
 
 
