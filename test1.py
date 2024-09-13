@@ -54,8 +54,7 @@ except Exception as e:
 
 
 # Subscribe instruments while connection is open
-sub_instruments =
-    [(marketfeed.NSE, "14436", marketfeed.Ticker)]
+sub_instruments = [(marketfeed.NSE, "14436", marketfeed.Ticker)]
 
 data.subscribe_symbols(sub_instruments)
 # Close Connection
