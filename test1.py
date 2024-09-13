@@ -18,8 +18,9 @@ async def on_message(instance, message):
     print("Received:", message)
 
 print("Subscription code :", subscription_code)
-feed = marketfeed.DhanFeed(client_id, access_token, instruments)
-feed.disconnect()
+feed = marketfeed.DhanFeed(client_id, access_token,instruments)
+feed.subscribe_symbols(instruments)
 # feed.run_forever()
-
 asyncio.create_task(feed.run_forever())
+feed.disconnect()
+
