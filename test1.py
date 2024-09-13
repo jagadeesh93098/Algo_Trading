@@ -52,14 +52,14 @@ try:
 except Exception as e:
     print(e)
 
-# Close Connection
-data.disconnect()
 
 # Subscribe instruments while connection is open
 sub_instruments =
     [(marketfeed.NSE, "14436", marketfeed.Ticker)]
 
 data.subscribe_symbols(sub_instruments)
+# Close Connection
+data.disconnect()
 
 # Unsubscribe instruments which are already active on connection
 unsub_instruments =
