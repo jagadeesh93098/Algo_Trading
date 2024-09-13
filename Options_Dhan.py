@@ -9,18 +9,48 @@ print(datetime.date.today())
 
 print(temp + datetime.timedelta(days = 7 - temp.weekday()))
 
+option_num = 0
+underlying = option_dict[option_num][0]
+underlying
 
-underlying = option_dict[1]
-next_expiry = datetime.datetime.strftime(temp + datetime.timedelta(days = 7 + 1 - temp.weekday()),'%d %b')
-next_expiry
+next_expiry = datetime.datetime.strftime(temp + datetime.timedelta(days = 7 + option_num - temp.weekday()),'%d %b')
+next_expiry.upper()
+
+
+df = pd.read_csv('api-scrip-master.csv')
+df.columns
+df_option_chain = df.loc[(df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_CUSTOM_SYMBOL'].str.contains(next_expiry.upper())) & (df['SEM_CUSTOM_SYMBOL'].str.contains(underlying)),['SEM_TRADING_SYMBOL','SEM_CUSTOM_SYMBOL','SEM_SMST_SECURITY_ID']].copy()
+df_option_chain.reset_index(inplace = True, drop = True)
+df_option_chain_call = df_option_chain.loc[df_option_chain['SEM_CUSTOM_SYMBOL'].str.contains('CALL'),:]
+df_option_chain_call.reset_index(inplace = True, drop = True)
+df_option_chain_call['STRIKE'] = [int(i.split(' ')[-2]) for i in df_option_chain_call['SEM_CUSTOM_SYMBOL']]
+df_option_chain_call.sort_values(by = 'STRIKE', ascending = True,inplace = True)
+df_option_chain_call.reset_index(inplace = True, drop = True)
+df_option_chain_call
+
+client_id = "1104088864"
+client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI3NTE5ODQzLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.XIKQpgBpDUa6CLjf67FjM-4c6lIfvURzU0Dob6RJIZUv3dyCmsZhXxiKMhSccdvCNdfPctU_vPSa6j8WclAfiA"
+
+instrument = [(0,'57726',15)]
+
+data = marketfeed.DhanFeed(client_id, client_token, instrument)
+data.run_forever()
+data.subscribe_symbols(instrument)
+data.get_data()
+data.disconnect()
+
+
+
+
+
+
+
 
 
 
 
 def get_list_of_options(unde)
-    
-client_id = "1104088864"
-client_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI2MTc4MzcwLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.tEheq0yFTPEWpKayI9Hp95sS8SjosYYIYZtMLZUjKqVbXFnnjWFUAUhPP5N3pZXRBYOOmnajiqDpnbXs0jWhvA"
+
 
 df = pd.read_csv('api-scrip-master.csv',low_memory = False)
 df.head()
@@ -59,10 +89,4 @@ df.loc[(df['SEM_EXM_EXCH_ID'] == 'NSE') & (df['SEM_INSTRUMENT_NAME'] == 'INDEX')
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'BSE') & (df['SEM_INSTRUMENT_NAME'] == 'OPTIDX') & (df['SEM_TRADING_SYMBOL'].str.contains(symbol)) & (df['SEM_EXPIRY_DATE'].str.contains('2024-09-13')) ,['SEM_SMST_SECURITY_ID','SEM_TRADING_SYMBOL','SEM_EXPIRY_DATE','SEM_CUSTOM_SYMBOL']]
 
 
-instrument = [(0,'13',15)]
 
-data = marketfeed.DhanFeed(client_id, client_token, instrument)
-data.run_forever()
-data.subscribe_symbols(instrument)
-data.get_data()
-data.disconnect()
