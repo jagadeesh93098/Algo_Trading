@@ -47,13 +47,11 @@ response = data.get_data()
 response
 data.disconnect()
 
+from dhan import dhanhq
 
-dhan.intraday_minute_data(
-    security_id='11536',
-    exchange_segment='NSE_EQ',
-    instrument_type='EQUITY'
-)
+dhan = dhanhq(client_id,client_token)
 
+dhan.intraday_minute_data('')
 
 
 
