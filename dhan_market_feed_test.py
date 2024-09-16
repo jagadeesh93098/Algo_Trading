@@ -17,8 +17,6 @@ df['SEM_EXM_EXCH_ID'].unique()
 
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS'),:].head()
 
-
-
 instruments = [(5,'430268',15)]
 
 data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
@@ -31,61 +29,3 @@ for i in range(0,10):
     data.get_data()
 print(f"Time Taken = {time.time() - start}")
 data.close_connection()
-
-
-import asyncio
-import websockets
-
-asyncio def test():
-    async with connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2") as w:
-        await.send('hello')
-
-# Client example
-import asyncio
-import websockets
-
-async def hello():
-    uri = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
-    async with websockets.connect(uri) as ws:
-        await ws.send("Hello, Server!")
-        response = await ws.recv()
-        print(response)
-
-asyncio.get_event_loop().run_until_complete(hello())
-
-
-import websocket
-
-def on_message(ws, message):
-    print(message)
-
-ws = websocket.WebSocketApp("ws://example.com/websocket",
-                            on_message=on_message)
-ws.run_forever()
-
-from websockets.sync.client import connect
-
-uri = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
-
-message = {
-    "RequestCode" : 15,
-    "InstrumentCount" : 2,
-    "InstrumentList" : [
-        {
-            "ExchangeSegment" : "NSE_EQ",
-            "SecurityId" : "1333"
-        },
-        {
-            "ExchangeSegment" : "BSE_EQ",
-            "SecurityId" : "532540"
-        }
-    ]
-}
-
-
-w = connect(uri)
-w.state
-w.send(message)
-print(w.recv())
-
-
