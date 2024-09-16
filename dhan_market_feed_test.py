@@ -67,9 +67,25 @@ from websockets.sync.client import connect
 
 uri = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
 
+message = {
+    "RequestCode" : 15,
+    "InstrumentCount" : 2,
+    "InstrumentList" : [
+        {
+            "ExchangeSegment" : "NSE_EQ",
+            "SecurityId" : "1333"
+        },
+        {
+            "ExchangeSegment" : "BSE_EQ",
+            "SecurityId" : "532540"
+        }
+    ]
+}
+
+
 w = connect(uri)
 w.state
-w.send('hello world!')
+w.send(message)
 print(w.recv())
 
 
