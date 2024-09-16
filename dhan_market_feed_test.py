@@ -24,11 +24,21 @@ data.run_forever()
 
 import time
 
+df_opt = pd.DataFrame({"LTP":[],"LTT":[]})
+
+df_fut = pd.DataFrame({"LTP":[],"LTT":[]})
+
 try:
     while True:
         data.run_forever()
         response = data.get_data()
-        print(response)
+        response
+        if response['security_id'] == 436104:
+            df_opt.loc[len(df_opt.index)] = [int(response['LTP']),int(response['LTT'])]
+            print(df_opt)
+        else:
+            df_fut.loc[len(df_fut.index)] = [int(response['LTP']),int(response['LTT'])]
+            print(df_fut)
 
 except Exception as e:
     print(e)
