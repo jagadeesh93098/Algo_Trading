@@ -22,3 +22,5 @@ data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, i
 data.run_forever()
 
 data.get_data()
+
+data.close_connection()
