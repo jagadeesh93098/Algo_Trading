@@ -54,4 +54,14 @@ async def hello():
 asyncio.get_event_loop().run_until_complete(hello())
 
 
+import websocket
+
+def on_message(ws, message):
+    print(message)
+
+ws = websocket.WebSocketApp("ws://example.com/websocket",
+                            on_message=on_message)
+ws.run_forever()
+
+
 
