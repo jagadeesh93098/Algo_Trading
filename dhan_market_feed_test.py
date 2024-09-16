@@ -40,20 +40,18 @@ asyncio def test():
     async with connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2") as w:
         await.send('hello')
 
-k = {
-    "RequestCode" : 15,
-    "InstrumentCount" : 2,
-    "InstrumentList" : [
-        {
-            "ExchangeSegment" : "NSE_EQ",
-            "SecurityId" : "1333"
-        },
-        {
-            "ExchangeSegment" : "BSE_EQ",
-            "SecurityId" : "532540"
-        }
-    ]
-}
+# Client example
+import asyncio
+import websockets
+
+async def hello():
+    uri = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
+    async with websockets.connect(uri) as ws:
+        await ws.send("Hello, Server!")
+        response = await ws.recv()
+        print(response)
+
+asyncio.get_event_loop().run_until_complete(hello())
 
 
 
