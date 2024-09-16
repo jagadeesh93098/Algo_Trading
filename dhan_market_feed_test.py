@@ -40,4 +40,20 @@ asyncio def test():
     async with websockets.connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2") as w:
         await.send('hello')
 
-test()
+k = {
+    "RequestCode" : 15,
+    "InstrumentCount" : 2,
+    "InstrumentList" : [
+        {
+            "ExchangeSegment" : "NSE_EQ",
+            "SecurityId" : "1333"
+        },
+        {
+            "ExchangeSegment" : "BSE_EQ",
+            "SecurityId" : "532540"
+        }
+    ]
+}
+
+
+
