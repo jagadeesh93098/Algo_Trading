@@ -63,5 +63,6 @@ ws = websocket.WebSocketApp("ws://example.com/websocket",
                             on_message=on_message)
 ws.run_forever()
 
+w = new 
 
 
