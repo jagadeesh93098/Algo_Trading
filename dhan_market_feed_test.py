@@ -17,7 +17,7 @@ df['SEM_EXM_EXCH_ID'].unique()
 
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS'),:].head()
 
-instruments = [(5,'430268',15)]
+instruments = [(5,'430268',15),()]
 
 data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 data.run_forever()
