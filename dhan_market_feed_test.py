@@ -24,6 +24,16 @@ data.run_forever()
 
 import time
 
+try:
+    while True:
+        data.run_forever()
+        response = data.get_data()
+        print(response)
+
+except Exception as e:
+    print(e)
+
+
 start = time.time()
 for i in range(0,10):
     data.get_data()
