@@ -24,7 +24,10 @@ instruments = [(5,'430268',15)]
 data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 data.run_forever()
 
+import time
+
+start = time.time()
 for i in range(0,10):
     data.get_data()
-
+print(f"Time Taken = {time.time() - start}")
 data.close_connection()
