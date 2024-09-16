@@ -33,10 +33,11 @@ print(f"Time Taken = {time.time() - start}")
 data.close_connection()
 
 
-
+import asyncio
 import websockets
 
-k = websockets.connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2")
-k.send("hello")
+asyncio def test():
+    async with websockets.connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2") as w:
+        await.send('hello')
 
-
+test()
