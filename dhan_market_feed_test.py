@@ -31,3 +31,12 @@ for i in range(0,10):
     data.get_data()
 print(f"Time Taken = {time.time() - start}")
 data.close_connection()
+
+
+
+import websockets
+
+k = websockets.connect(f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2")
+k.send("hello")
+
+
