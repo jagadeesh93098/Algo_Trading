@@ -34,15 +34,16 @@ try:
         response = data.get_data()
         response
         if response['security_id'] == 436104:
-            df_opt.loc[len(df_opt.index)] = [int(response['LTP']),int(response['LTT'])]
+            df_opt.loc[len(df_opt.index)] = [eval(response['LTP']),eval(response['LTT'])]
             print(df_opt)
         else:
-            df_fut.loc[len(df_fut.index)] = [int(response['LTP']),int(response['LTT'])]
+            df_fut.loc[len(df_fut.index)] = [eval(response['LTP']),eval(response['LTT'])]
             print(df_fut)
 
 except Exception as e:
     print(e)
 
+eval('192.3')
 
 start = time.time()
 for i in range(0,10):
