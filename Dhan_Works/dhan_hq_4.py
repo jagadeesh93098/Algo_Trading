@@ -83,7 +83,7 @@ def get_historical_data(access_token):
         'access-token':access_token
     }
     print(my_headers)
-    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01" ,"toDate": "2024-09-01",'symbol':'HDFCBANK','expiryCode':0}
+    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01" ,"toDate": "2024-09-01",'symbol':' HDFC BANK LTD','expiryCode':0}
     print(data)
     payload = json.dumps(data)
     print(payload)
