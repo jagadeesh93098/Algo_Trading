@@ -60,3 +60,5 @@ access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5
 
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" unzip awscliv2.zip sudo ./aws/install
+
+"ubuntu@ec2-65-0-110-51.ap-south-1.compute.amazonaws.com"
