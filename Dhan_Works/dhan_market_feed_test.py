@@ -74,3 +74,4 @@ print(get_historical_data_curl)
 
 
 
+curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: JWT' --data '{'securityId': '1333', 'exchangeSegment': 'NSE_EQ', 'instrument': 'EQUITY', 'expiryCode': 0, 'fromDate': '2022-01-08', 'toDate': '2022-02-08'}'
