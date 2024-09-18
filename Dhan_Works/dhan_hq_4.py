@@ -80,17 +80,47 @@ def get_historical_data(access_token):
     print(chart_url)
     my_headers = {
         'Content-Type':'application/json',
-        'access-token':access_token
+        'access-token':access_token,
+        'Accept':'application/json'
     }
     print(my_headers)
-    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01" ,"toDate": "2024-09-01",'symbol':' HDFC BANK LTD','expiryCode':0}
+    data = {
+        "securityId": "500180",
+        "exchangeSegment": "NSE_EQ",
+        'expiryCode': 0,
+        "instrument": "EQUITY",
+        "fromDate": "2022-01-01" ,
+        "toDate": "2023-09-01"
+        }
     print(data)
-    payload = json.dumps(data)
-    print(payload)
-    response = requests.post(url = chart_url, headers = my_headers, data = payload)
+    # payload = json.dumps(data)
+    # print(payload)
+    response = requests.post(url = chart_url, headers = my_headers, json = data)
     if response.status_code != 200:
         print("Error : Check the Output")
     return response.json()
 
 get_historical_data(access_token)
 
+
+import requests
+
+url = "https://api.dhan.co/v2/charts/historical"
+
+payload = {
+    "securityId": "1333",
+    "exchangeSegment": "NSE_EQ",
+    "instrument": "EQUITY",
+    "expiryCode": 0,
+    "fromDate": "2019-08-24",
+    "toDate": "2019-09-30"
+}
+headers = {
+    "access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ",
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.json())

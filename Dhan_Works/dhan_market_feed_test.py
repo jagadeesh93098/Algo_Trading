@@ -19,6 +19,8 @@ df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_TRADING_SYMBOL'].str.startswi
 
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS')) & (df['SEM_STRIKE_PRICE'] == 190),:].head()
 
+df.loc[df['SEM_SMST_SECURITY_ID'] == 1333,:]
+
 instruments = [(5,'430268',15),(5,'436104',15)]
 
 data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
