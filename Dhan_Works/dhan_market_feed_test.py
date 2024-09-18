@@ -2,10 +2,10 @@ from dhanhq import marketfeed
 import pandas as pd
 
 
-client_id = '1104088864'
-access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI2NTE2MzkwLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.1ro6-2OzEiDH2XhaImfzGXBOF6ZR6OkxZ6cOn4xG0A7itc_AvdlXuIKAoJNsSxIgTVr924xUi37Ko9pqip1nzg'
+client_id = "1104088864"
+access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ"
 
-security_url = "https://images.dhan.co/api-data/api-scrip-master.csv"
+security_url = "Dhan_Works/security.csv"
 
 df = pd.read_csv(security_url,low_memory = False)
 
