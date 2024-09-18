@@ -93,3 +93,7 @@ def get_historical_data(access_token):
     return response.json()
 
 get_historical_data(access_token)
+
+BUY ORDER
+TRIGGER PRICE 
+LIMIT PRICE
