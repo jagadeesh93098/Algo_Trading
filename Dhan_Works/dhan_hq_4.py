@@ -77,7 +77,8 @@ def get_positions(access_token):
 def get_historical_data(access_token):
     url = "https://api.dhan.co/v2/charts/historical"
     headers = {
-        'Content-Type':'application/json',
+        'Content-Type':'application/json',,
+        'Accept':'application/json',
         'access-toekn':access_token
     }
 
