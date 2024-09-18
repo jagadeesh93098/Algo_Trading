@@ -126,3 +126,6 @@ print(f"Sleeping for 1 sec.")
 time.sleep(1)
 
 get_option_data()
+"https://images.dhan.co/api-data/api-scrip-master.csv"
+
+
