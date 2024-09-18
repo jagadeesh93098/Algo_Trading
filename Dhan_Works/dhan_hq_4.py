@@ -80,7 +80,6 @@ def get_historical_data(access_token):
     print(url)
     headers = {
         'Content-Type':'application/json',
-        'Accept':'application/json',
         'access-token':access_token
     }
     print(headers)
@@ -88,7 +87,7 @@ def get_historical_data(access_token):
     print(data)
     payload = json.dumps(data)
     print(payload)
-    response = requests.post(url = url, headers = headers, data = payload)
+    response = requests.post(url = url, headers = headers, data = data)
     if response.status_code != 200:
         print("Error : Check the Output")
     return response.json()
