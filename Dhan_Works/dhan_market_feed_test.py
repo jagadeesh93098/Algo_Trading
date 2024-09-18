@@ -60,12 +60,12 @@ access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5
 ""
 
 data = {
-    "securityId": "1333",
-    "exchangeSegment":"NSE_EQ",
-    "instrument": "EQUITY",
+    "securityId": "35000",
+    "exchangeSegment":"NSE_FNO",
+    "instrument": "FUTIDX",
     "expiryCode": 0,
-    "fromDate": "2022-01-08",
-    "toDate": "2022-02-08"
+    "fromDate": "2022-09-17",
+    "toDate": "2022-09-19"
 }
 
 import json
@@ -80,4 +80,4 @@ print(get_historical_data_curl)
 
 
 
-curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: JWT' --data '{'securityId': '1333', 'exchangeSegment': 'NSE_EQ', 'instrument': 'EQUITY', 'expiryCode': 0, 'fromDate': '2022-01-08', 'toDate': '2022-02-08'}'
+curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: JWT' --data '{'securityId': '350000', 'exchangeSegment': 'NSE_EQ', 'instrument': 'EQUITY', 'expiryCode': 0, 'fromDate': '2022-01-08', 'toDate': '2022-02-08'}'
