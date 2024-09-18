@@ -80,4 +80,4 @@ print(get_historical_data_curl)
 
 
 
-curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: JWT' --data '{'securityId': '350000', 'exchangeSegment': 'NSE_EQ', 'instrument': 'EQUITY', 'expiryCode': 0, 'fromDate': '2022-01-08', 'toDate': '2022-02-08'}'
+curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ' --data '{"securityId": "35000", "exchangeSegment": "NSE_FNO", "instrument": "FUTIDX", "expiryCode": 0, "fromDate": "2022-09-17", "toDate": "2022-09-19"}'
