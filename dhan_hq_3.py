@@ -125,4 +125,4 @@ idx_ltp
 print(f"Sleeping for 1 sec.")
 time.sleep(1)
 
-get_option_data() 
+get_option_data()
