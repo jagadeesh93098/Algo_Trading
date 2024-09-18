@@ -1,7 +1,9 @@
 from dhanhq import marketfeed
 import pandas as pd
+import time
 
 
+# Path for the Security File
 security_url = "Dhan_Works/security.csv"
 
 df = pd.read_csv(security_url,low_memory = False)
@@ -23,9 +25,12 @@ data.run_forever()
 data.get_data()
 data.close_connection()
 
-import time
 
 df = pd.DataFrame({"Security_ID":[],"LTP":[],"LTT":[]})
+
+""""
+For Continous Data Flow
+""""
 
 try:
     data.run_forever()
