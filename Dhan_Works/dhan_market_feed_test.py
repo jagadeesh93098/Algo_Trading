@@ -42,15 +42,15 @@ try:
         response
         if response['security_id'] == 436104:
             df_opt.loc[len(df_opt.index)] = [eval(response['LTP']),response['LTT']]
+            print(f'FUT_OPT - Security_id = 436104')
             print(df_opt)
         else:
+            print(f"FUT_COM - Security_id = 430268")
             df_fut.loc[len(df_fut.index)] = [eval(response['LTP']),response['LTT']]
             print(df_fut)
 
 except Exception as e:
     print(e)
-
-eval('192.3')
 
 start = time.time()
 for i in range(0,10):
