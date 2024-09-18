@@ -23,6 +23,8 @@ instruments = [(5,'430268',15),(5,'436104',15)]
 
 data = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 data.run_forever()
+data.get_data()
+
 
 import time
 
