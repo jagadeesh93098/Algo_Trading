@@ -37,12 +37,10 @@ try:
         response = data.get_data()
         df.loc[len(df.index)] = [response['security_id'],eval(response['LTP']),response['LTT']]
         print(df)
-
 except Exception as e:
     print(e)
 
 data.close_connection()
-
 start = time.time()
 for i in range(0,10):
     data.get_data()
