@@ -91,7 +91,7 @@ def get_historical_data(access_token):
     }
     payload = json.dumps(data)
 
-    response = requests.post(url = url, headers = headers, json = payload)
+    response = requests.post(url = url, headers = headers, data = payload)
     if response.status_code != 200:
         print("Error : Check the Output")
     return response.json()
