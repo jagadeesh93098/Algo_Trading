@@ -68,7 +68,7 @@ data = {
     "toDate": "2022-02-08"
 }
 
-get_historical_data_curl = f"curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: JWT' --data '{data}'"
+get_historical_data_curl = f"curl --request POST --url https://api.dhan.co/v2/charts/historical --header 'Content-Type: application/json' --header 'access-token: {access_token}' --data '{data}'"
 
 print(get_historical_data_curl)
 
