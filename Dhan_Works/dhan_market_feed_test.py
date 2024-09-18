@@ -1,7 +1,6 @@
 from dhanhq import marketfeed
 import pandas as pd
 
-
 client_id = "1104088864"
 access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ"
 
@@ -14,8 +13,6 @@ df.head()
 df['SEM_INSTRUMENT_NAME'].unique()
 
 df['SEM_EXM_EXCH_ID'].unique()
-
-df.loc[(df['SEM_EXM_EXCH_ID'] == 'NSE')]
 
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS')) & (df['SEM_STRIKE_PRICE'] == 190),:].head()
 
