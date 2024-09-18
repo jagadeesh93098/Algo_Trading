@@ -74,5 +74,6 @@ def get_positions(access_token):
     df = pd.DataFrame(data)
     return df.loc[:,['tradingSymbol', 'securityId', 'positionType','productType', 'buyAvg', 'costPrice', 'buyQty', 'sellAvg', 'sellQty', 'netQty', 'realizedProfit', 'unrealizedProfit', 'dayBuyQty', 'daySellQty', 'dayBuyValue', 'daySellValue']].copy()
 
-def place_order(access_token):
+def get_historical_data(access_token):
     
+
