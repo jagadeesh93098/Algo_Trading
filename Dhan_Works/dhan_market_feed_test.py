@@ -31,29 +31,21 @@ data.close_connection()
 
 import time
 
-df_opt = pd.DataFrame({"LTP":[],"LTT":[]})
-
-df_fut = pd.DataFrame({"LTP":[],"LTT":[]})
+df = pd.DataFrame({"Security_ID":[],"LTP":[],"LTT":[]})
 
 try:
+    data.run_forever()
     while True:
-        data.run_forever()
         response = data.get_data()
-        response
-        if response['security_id'] == 436104:
-            df_opt.loc[len(df_opt.index)] = [eval(response['LTP']),response['LTT']]
-            print(f'FUT_OPT - Security_id = 436104')
-            print(df_opt)
-        else:
-            print(f"FUT_COM - Security_id = 430268")
-            df_fut.loc[len(df_fut.index)] = [eval(response['LTP']),response['LTT']]
-            print(df_fut)
+        df.loc[len(df.index)] = [response['security_id'],eval(response['LTP']),response['LTT']]
+        print(df)
 
 except Exception as e:
     print(e)
+
+data.close_connection()
 
 start = time.time()
 for i in range(0,10):
     data.get_data()
 print(f"Time Taken = {time.time() - start}")
-data.close_connection()
