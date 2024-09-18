@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import json
 
 client_id = "1104088864"
 access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ"
@@ -76,22 +77,17 @@ def get_positions(access_token):
 
 def get_historical_data(access_token):
     url = "https://api.dhan.co/v2/charts/historical"
-    
+    print(url)
     headers = {
-        'Content-Type':'application/json',,
+        'Content-Type':'application/json',
         'Accept':'application/json',
         'access-token':access_token
     }
-
-    data = {"securityId": "500180",
-        "exchangeSegment": "NSE_EQ",
-        "instrument": "EQUITY",
-        "fromDate": "2024-01-01",
-        "expiryCode":0,
-        "toDate": "2024-09-12"
-    }
+    print(headers)
+    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01","expiryCode": 0 ,"toDate": "2024-09-12"}
+    print(data)
     payload = json.dumps(data)
-
+    print(payload)
     response = requests.post(url = url, headers = headers, data = payload)
     if response.status_code != 200:
         print("Error : Check the Output")
