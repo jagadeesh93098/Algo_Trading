@@ -89,8 +89,8 @@ def get_historical_data(security_id,exchange_segment,instrument,access_token):
         "exchangeSegment": exchange_segment,
         'expiryCode': 0,
         "instrument": instrument,
-        "fromDate": "2022-01-01" ,
-        "toDate": "2023-09-01"
+        "fromDate": "2024-09-17" ,
+        "toDate": "2024-09-18"
         }
     print(data)
     # payload = json.dumps(data)
@@ -102,7 +102,14 @@ def get_historical_data(security_id,exchange_segment,instrument,access_token):
 
 
 # ITC
-security_id = '38'
+security_id = '1660'
+exchange_segment = 'NSE_EQ'
+instrument = 'EQUITY'
+
+get_historical_data(security_id,exchange_segment,instrument,access_token)
+
+# NIFTY 50
+security_id = '13'
 exchange_segment = 'IDX_I'
 instrument = 'INDEX'
 
