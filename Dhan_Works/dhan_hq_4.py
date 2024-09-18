@@ -75,7 +75,7 @@ def get_positions(access_token):
     df = pd.DataFrame(data)
     return df.loc[:,['tradingSymbol', 'securityId', 'positionType','productType', 'buyAvg', 'costPrice', 'buyQty', 'sellAvg', 'sellQty', 'netQty', 'realizedProfit', 'unrealizedProfit', 'dayBuyQty', 'daySellQty', 'dayBuyValue', 'daySellValue']].copy()
 
-def get_historical_data(access_token):
+def get_historical_data(security_id,exchange_segment,instrument,access_token):
     chart_url = "https://api.dhan.co/v2/charts/historical"
     print(chart_url)
     my_headers = {
@@ -85,10 +85,10 @@ def get_historical_data(access_token):
     }
     print(my_headers)
     data = {
-        "securityId": "500180",
-        "exchangeSegment": "NSE_EQ",
+        "securityId": security_id,
+        "exchangeSegment": exchange_segment,
         'expiryCode': 0,
-        "instrument": "EQUITY",
+        "instrument": instrument,
         "fromDate": "2022-01-01" ,
         "toDate": "2023-09-01"
         }
@@ -100,7 +100,13 @@ def get_historical_data(access_token):
         print("Error : Check the Output")
     return response.json()
 
-get_historical_data(access_token)
+
+# ITC
+security_id = '1660'
+exchange_segment = 'NSE_EQ'
+instrument = 'EQUITY'
+
+get_historical_data(security_id,exchange_segment,instrument,access_token)
 
 
 import requests
@@ -108,7 +114,7 @@ import requests
 url = "https://api.dhan.co/v2/charts/historical"
 
 payload = {
-    "securityId": "1333",
+    "securityId": "1660",
     "exchangeSegment": "NSE_EQ",
     "instrument": "EQUITY",
     "expiryCode": 0,

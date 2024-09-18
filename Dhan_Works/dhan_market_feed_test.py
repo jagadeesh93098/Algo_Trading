@@ -13,7 +13,9 @@ df['SEM_INSTRUMENT_NAME'].unique()
 
 df['SEM_EXM_EXCH_ID'].unique()
 
-df.loc[(df['SEM_INSTRUMENT_NAME']=='EQUITY') & (df['SEM_TRADING_SYMBOL']).str.startswith('HDFC') ,:]
+df.loc[(df['SEM_INSTRUMENT_NAME']=='EQUITY') & (df['SEM_TRADING_SYMBOL']).str.startswith('ITC') & (df['SEM_SERIES'] == 'EQ'),:]
+
+df.loc[(df['SEM_INSTRUMENT_NAME'] == 'INDEX') & (df['SEM_TRADING_SYMBOL'].str.startswith('NIFTY')),:]
 
 df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS')) & (df['SEM_INSTRUMENT_NAME'] == 'FUTCOM'),:]
 
