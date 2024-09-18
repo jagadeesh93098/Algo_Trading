@@ -77,13 +77,13 @@ def get_positions(access_token):
 
 def get_historical_data(security_id,exchange_segment,instrument,access_token):
     chart_url = "https://api.dhan.co/v2/charts/historical"
-    print(chart_url)
+    # print(chart_url)
     my_headers = {
         'Content-Type':'application/json',
         'access-token':access_token,
         'Accept':'application/json'
     }
-    print(my_headers)
+    # print(my_headers)
     data = {
         "securityId": security_id,
         "exchangeSegment": exchange_segment,
@@ -92,7 +92,7 @@ def get_historical_data(security_id,exchange_segment,instrument,access_token):
         "fromDate": "2024-09-17" ,
         "toDate": "2024-09-18"
         }
-    print(data)
+    # print(data)
     # payload = json.dumps(data)
     # print(payload)
     response = requests.post(url = chart_url, headers = my_headers, json = data)
