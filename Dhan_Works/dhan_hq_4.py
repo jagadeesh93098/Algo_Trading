@@ -76,18 +76,18 @@ def get_positions(access_token):
     return df.loc[:,['tradingSymbol', 'securityId', 'positionType','productType', 'buyAvg', 'costPrice', 'buyQty', 'sellAvg', 'sellQty', 'netQty', 'realizedProfit', 'unrealizedProfit', 'dayBuyQty', 'daySellQty', 'dayBuyValue', 'daySellValue']].copy()
 
 def get_historical_data(access_token):
-    url = "https://api.dhan.co/v2/charts/historical"
-    print(url)
-    headers = {
+    chart_url = "https://api.dhan.co/v2/charts/historical"
+    print(chart_url)
+    my_headers = {
         'Content-Type':'application/json',
         'access-token':access_token
     }
-    print(headers)
-    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01","expiryCode": 0 ,"toDate": "2024-09-01"}
+    print(my_headers)
+    data = {"securityId": "500180","exchangeSegment": "NSE_EQ","instrument": "EQUITY","fromDate": "2024-01-01" ,"toDate": "2024-09-01",'symbol':'HDFCBANK'}
     print(data)
     payload = json.dumps(data)
     print(payload)
-    response = requests.post(url = url, headers = headers, data = data)
+    response = requests.post(url = chart_url, headers = my_headers, data = payload)
     if response.status_code != 200:
         print("Error : Check the Output")
     return response.json()
