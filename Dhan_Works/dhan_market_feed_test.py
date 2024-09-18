@@ -2,7 +2,6 @@ from dhanhq import marketfeed
 import pandas as pd
 import time
 
-
 # Path for the Security File
 security_url = "Dhan_Works/security.csv"
 
