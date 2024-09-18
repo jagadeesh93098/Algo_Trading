@@ -82,9 +82,9 @@ def get_historical_data(access_token):
         'access-toekn':access_token
     }
 
-    data = {"securityId": "13",
-        "exchangeSegment": "IDX_I",
-        "instrument": "INDEX",
+    data = {"securityId": "500180",
+        "exchangeSegment": "NSE_EQ",
+        "instrument": "EQUITY",
         "fromDate": "2024-01-01",
         "expiryCode":0,
         "toDate": "2024-09-12"
