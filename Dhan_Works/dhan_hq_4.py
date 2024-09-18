@@ -19,6 +19,8 @@ def get_fund_limit(access_token):
     df = pd.DataFrame(data)
     return df
 
+get_fund_limit(access_token)
+
 def get_order_book(access_token):
     order_book_url = "https://api.dhan.co/orders"
     headers = {'Content-Type':'application/json',
@@ -71,3 +73,6 @@ def get_positions(access_token):
                 data[j] = [i[j]]
     df = pd.DataFrame(data)
     return df.loc[:,['tradingSymbol', 'securityId', 'positionType','productType', 'buyAvg', 'costPrice', 'buyQty', 'sellAvg', 'sellQty', 'netQty', 'realizedProfit', 'unrealizedProfit', 'dayBuyQty', 'daySellQty', 'dayBuyValue', 'daySellValue']].copy()
+
+def place_order(access_token):
+    
