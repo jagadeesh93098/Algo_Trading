@@ -94,6 +94,3 @@ def get_historical_data(access_token):
 
 get_historical_data(access_token)
 
-BUY ORDER
-TRIGGER PRICE 
-LIMIT PRICE
