@@ -26,7 +26,6 @@ data.run_forever()
 data.get_data()
 data.close_connection()
 
-
 import time
 
 df_opt = pd.DataFrame({"LTP":[],"LTT":[]})
