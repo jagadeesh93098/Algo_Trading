@@ -75,6 +75,7 @@ def get_positions(access_token):
     return df.loc[:,['tradingSymbol', 'securityId', 'positionType','productType', 'buyAvg', 'costPrice', 'buyQty', 'sellAvg', 'sellQty', 'netQty', 'realizedProfit', 'unrealizedProfit', 'dayBuyQty', 'daySellQty', 'dayBuyValue', 'daySellValue']].copy()
 
 def get_historical_data(access_token):
+def get_historical_data(access_token):
     url = "https://api.dhan.co/v2/charts/historical"
     headers = {
         'Content-Type':'application/json',,
@@ -82,12 +83,11 @@ def get_historical_data(access_token):
         'access-toekn':access_token
     }
 
-    data = {
-        "securityId": "13",
-        "exchangeSegment":"IDX_I",
+    data = {"securityId": "13",
+        "exchangeSegment": "IDX_I",
         "instrument": "INDEX",
-        "expiryCode": None,
         "fromDate": "2024-01-01",
+        "expiryCode":0,
         "toDate": "2024-09-12"
     }
 
