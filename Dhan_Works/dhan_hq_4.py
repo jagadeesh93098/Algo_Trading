@@ -102,9 +102,9 @@ def get_historical_data(security_id,exchange_segment,instrument,access_token):
 
 
 # ITC
-security_id = '1660'
-exchange_segment = 'NSE_EQ'
-instrument = 'EQUITY'
+security_id = '38'
+exchange_segment = 'IDX_I'
+instrument = 'INDEX'
 
 get_historical_data(security_id,exchange_segment,instrument,access_token)
 
