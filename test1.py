@@ -18,17 +18,14 @@ access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5
 instruments = [(5,str(opt_s_id),15)]
 
 instruments
-
-
 response = feed.get_data()
 
 ltp = eval(response['LTP'])
 
 ltp
-
-test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[]})
+test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 buy_price = ltp
-test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp]
+test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
@@ -40,8 +37,12 @@ while exit == False:
     if ltp-buy_price >= 0.02*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
+        test.loc[test['order_id'] == 't1','remark'] ='Profit_Booked'
         exit = True
         break
+    if ltp - buy_price <= -1*(0.01)*buy_price:
+        test.loc[test['order_id'] == 't1','ltp'] = ltp
+        print('Sold')
     print(test)
 
 feed.close_connection()
