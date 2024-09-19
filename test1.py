@@ -29,8 +29,8 @@ test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'lt
 buy_price = ltp
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
-p = 0.15
-p_l = -0.05
+p = 0.05
+p_l = -0.01
 exit = False
 while exit == False:
     response = feed.get_data()
