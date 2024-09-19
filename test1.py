@@ -43,6 +43,7 @@ while exit == False:
     if ltp - buy_price <= -1*(0.01)*buy_price:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         print('Sold')
+        test.loc[test['order_id']=='t1','remark'] = 'Stop Loss'
     print(test)
 
 feed.close_connection()
