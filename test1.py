@@ -25,8 +25,9 @@ response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
 # buy_price = ltp
+buy_price = 4.65
 
-test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'Underlying_LTP':[],'remark' : []})
+test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 p = 0.05
