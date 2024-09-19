@@ -26,7 +26,7 @@ ltp = eval(response['LTP'])
 ltp
 # buy_price = ltp
 
-test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
+test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'Underlying_LTP':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 p = 0.05
