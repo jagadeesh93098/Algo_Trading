@@ -30,14 +30,17 @@ test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'lt
 buy_price = ltp
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp]
 
-while True:
-    feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
-    feed.run_forever()
+feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
+feed.run_forever()
+exit = False
+while exit = False:
     response = feed.get_data()
     ltp = eval(response['LTP'])
-    if ltp-buy_price >= 0.02*buy_price:
+    if ltp-buy_price >= 0.02*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
-        test.loc[test['order_id'] == 't2','ltp'] = 
+        test.loc[test['order_id'] == 't2','ltp'] = ltp
+        exit = True
+        print(test)
 
 
 
