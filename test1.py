@@ -56,6 +56,7 @@ while exit == False:
         break
     print(test)
     print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
+    print(f"Present Target Min Profit = {p_l}")
 
 feed.close_connection()
 
