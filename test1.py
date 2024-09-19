@@ -36,15 +36,14 @@ exit = False
 while exit == False:
     response = feed.get_data()
     ltp = eval(response['LTP'])
+    test.loc[test['order_id'] == 't1','ltp'] = ltp
     if ltp-buy_price >= 0.02*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
-        test.loc[test['order_id'] == 't2','ltp'] = ltp
         print('Sold')
         exit = True
         break
     print(test)
 
-
-
+feed.close_connection()
 
 
