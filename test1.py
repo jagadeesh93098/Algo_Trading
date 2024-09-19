@@ -23,10 +23,10 @@ instruments
 response = feed.get_data()
 
 ltp = eval(response['LTP'])
-
 ltp
-test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 # buy_price = ltp
+
+test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 p = 0.05
@@ -56,7 +56,8 @@ while exit == False:
         break
     print(test)
     print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
-    print(f"Present Target Min Profit = {p_l}")
+    print(f"Present Stop Loss = {p_l}")
+    print(f"Present Target Profit = {p}")
 
 feed.close_connection()
 
