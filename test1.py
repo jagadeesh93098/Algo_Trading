@@ -60,8 +60,3 @@ while exit == False:
     print(f"Present Target Profit = {p}")
 
 feed.close_connection()
-
-test
-p
-
-
