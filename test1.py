@@ -32,8 +32,8 @@ instruments = [(0,str(underlying_sid),15)]
 instruments
 
 
-my_strike = 83500
-my_option_type = 'CE'
+my_strike = 84000
+my_option_type = 'PE'
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
@@ -56,12 +56,12 @@ response = feed.get_data()
 # if response['security_id'] == opt_sid:
 ltp = eval(response['LTP'])
 ltp
-buy_price = 103.5
-# buy_price = ltp
+# buy_price = 103.5
+buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
-p = 0.1
+p = 0.05
 p_l = -0.1
 exit = False
 while exit == False:
@@ -72,7 +72,7 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.1
-            p_l = present_p - 0.1
+            p_l = present_p - 0.05
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
