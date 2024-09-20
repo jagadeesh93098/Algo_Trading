@@ -3,6 +3,7 @@ from dhanhq import marketfeed
 import requests
 import datetime
 
+
 df = pd.read_csv('Dhan_Works/security.csv',low_memory = False)
 
 today = datetime.datetime.today().date()
@@ -24,6 +25,10 @@ instrument = 'OPTIDX'
 today_date
 
 df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
+
+
+
+
 
 df_opt
 
