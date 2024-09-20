@@ -75,7 +75,7 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.1
-            p_l = present_p - 0.05
+            p_l = present_p - 0.1
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
@@ -91,10 +91,10 @@ while exit == False:
             print(test)
             exit = True
             break
+        p_l+=0.002
         print(test)
         print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
         print(f"Present Stop Loss = {p_l}")
         print(f"Present Target Profit = {p}")
-        time.sleep(10)
 
 feed.close_connection()
