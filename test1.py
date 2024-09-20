@@ -74,8 +74,8 @@ while exit == False:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
-            p = present_p + 0.05
             p_l = p_l + present_p - p
+            p = present_p + 0.05
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
