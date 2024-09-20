@@ -16,7 +16,7 @@ today_date = datetime.datetime.strftime(today,'%Y-%m-%d')
 
 today_date
 
-underlying = 'NATURALGAS'
+underlying = 'CRUDE'
 exch = 'MCX'
 instrument = 'FUTCOM'
 
@@ -29,6 +29,8 @@ underlying_sid
 instrument = 'OPTFUT'
 
 today_date
+
+df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),:].copy()
 
 df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),:].copy()
 
