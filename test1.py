@@ -35,8 +35,8 @@ feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, i
 feed.run_forever()
 response = feed.get_data()
 
-my_strike = 83900
-my_option_type = 'PE'
+my_strike = 83500
+my_option_type = 'CE'
 
 opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
@@ -52,7 +52,7 @@ response = feed.get_data()
 # if response['security_id'] == opt_sid:
 ltp = eval(response['LTP'])
 ltp
-buy_price = 185.7
+buy_price = 103.5
 # buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
@@ -67,8 +67,8 @@ while exit == False:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
-            p = present_p + 0.05
-            p_l = present_p - 0.05
+            p = present_p + 0.1
+            p_l = present_p - 0.1
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
