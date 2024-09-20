@@ -70,7 +70,7 @@ ltp
 buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
-
+test
 # abs(pt - presentp)/abs(present_p - p)
 
 p = 0.05
@@ -79,34 +79,33 @@ exit = False
 target_breached = 0
 while exit == False:
     response = feed.get_data()
-    if response['security_id'] == opt_sid:
-        ltp = eval(response['LTP'])
-        test.loc[test['order_id'] == 't1','ltp'] = ltp
-        present_p = (ltp - buy_price)/buy_price
-        if present_p >= p:
-            p = present_p + 0.05
-            p_l = max((p - 3*present_p)/2,p_l)
-            target_breached = 1
+    ltp = eval(response['LTP'])
+    test.loc[test['order_id'] == 't1','ltp'] = ltp
+    present_p = (ltp - buy_price)/buy_price
+    if present_p >= p:
+        p = present_p + 0.05
+        p_l = max((p - 3*present_p)/2,p_l)
+        target_breached = 1
     if target_breached == 1:
         p_l = max((p - 3*present_p)/2,p_l)
-        if ltp - buy_price > p*buy_price :
-            test.loc[test['order_id'] == 't1','sell_price'] = ltp
-            print('Sold')
-            test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p}'
-            print(test)
-            exit = True
-            break
-        if ltp - buy_price < p_l*buy_price:
-            test.loc[test['order_id'] == 't1','ltp'] = ltp
-            print('Sold based on Stop Loss')
-            print(f"Profit/Loss Booked = {p_l}")
-            test.loc[test['order_id']=='t1','remark'] = 'Stop Loss'
-            print(test)
-            exit = True
-            break
+    if ltp - buy_price > p*buy_price :
+        test.loc[test['order_id'] == 't1','sell_price'] = ltp
+        print('Sold')
+        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p}'
         print(test)
-        print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
-        print(f"Present Stop Loss = {p_l}")
-        print(f"Present Target Profit = {p}")
+        exit = True
+        break
+    if ltp - buy_price < p_l*buy_price:
+        test.loc[test['order_id'] == 't1','ltp'] = ltp
+        print('Sold based on Stop Loss')
+        print(f"Profit/Loss Booked = {p_l}")
+        test.loc[test['order_id']=='t1','remark'] = 'Stop Loss'
+        print(test)
+        exit = True
+        break
+    print(test)
+    print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
+    print(f"Present Stop Loss = {p_l}")
+    print(f"Present Target Profit = {p}")
 
 feed.close_connection()
