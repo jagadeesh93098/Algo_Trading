@@ -60,11 +60,11 @@ while exit == False:
     response = feed.get_data()
     ltp = eval(response['LTP'])
     test.loc[test['order_id'] == 't1','ltp'] = ltp
-    present_p = (ltp - buy_price)/ltp
+    present_p = (ltp - buy_price)/buy_price
     if present_p - p > 0.2:
         p = present_p + 0.1
         p_l = present_p
-    if ltp - buy_price >= p*buy_price :
+    if ltp - buy_price > p*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
         test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p}'
@@ -84,3 +84,5 @@ while exit == False:
     print(f"Present Target Profit = {p}")
 
 feed.close_connection()
+
+present_p
