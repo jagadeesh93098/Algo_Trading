@@ -35,28 +35,27 @@ feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, i
 feed.run_forever()
 response = feed.get_data()
 
-my_strike = 83600
+my_strike = 83900
 my_option_type = 'PE'
 
 opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
 instruments = [(8,str(opt_sid),15)]
-feed.subscribe_symbols(instruments)
-# feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
-# feed.run_forever()
+feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
+feed.run_forever()
 get_opt_ltp = False
-while get_opt_ltp == False:
-    response = feed.get_data()
-    if response['security_id'] == opt_sid:
-        get_opt_ltp = True
+# while get_opt_ltp == False:
+response = feed.get_data()
+    # if response['security_id'] == opt_sid:
+    #     get_opt_ltp = True
 
-if response['security_id'] == opt_sid:
-    ltp = eval(response['LTP'])
-    ltp
-    # buy_price = 149.7
-    buy_price = ltp
-    test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
-    test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
+# if response['security_id'] == opt_sid:
+ltp = eval(response['LTP'])
+ltp
+# buy_price = 149.7
+buy_price = ltp
+test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
+test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 p = 0.1
 p_l = -0.1
