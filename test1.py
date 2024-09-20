@@ -36,34 +36,25 @@ feed.run_forever()
 response = feed.get_data()
 feed.close_connection()
 
-df_opt.SEM_STRIKE_PRICE
+my_strike = 83000
+my_option_type = 'PE'
 
-df_opt
+opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
-
-
-strike = 190
-
-opt_s_id = df_opt.loc[(df_opt['SEM_STRIKE_PRICE']==190) & (df_opt['SEM_OPTION_TYPE'] == 'CE'),'SEM_SMST_SECURITY_ID'].item()
-
-
+instruments = [(8,str(opt_sid),15)]
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
-instruments = [(5,str(opt_s_id),15)]
-
-instruments
 response = feed.get_data()
-
 ltp = eval(response['LTP'])
 ltp
-# buy_price = ltp
-buy_price = 4.65
+buy_price = ltp
+# buy_price = 4.65
 
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 p = 0.05
-p_l = -0.01
+p_l = -0.05
 exit = False
 while exit == False:
     response = feed.get_data()
