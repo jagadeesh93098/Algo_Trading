@@ -32,8 +32,8 @@ df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == 
 # instruments
 
 
-my_strike = 84100
-my_option_type = 'PE'
+my_strike = 84200
+my_option_type = 'CE'
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
