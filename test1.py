@@ -30,9 +30,9 @@ instrument = 'OPTFUT'
 
 today_date
 
-df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),:].copy()
+df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-10')),:]
 
-df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),:].copy()
+df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-10')),:].copy()
 
 df_opt
 
@@ -43,8 +43,8 @@ df_opt
 
 # my_strike = int(sys.argv[1])
 # my_option_type = str(sys.argv[2])
-my_strike = 195
-my_option_type = 'CE'
+my_strike = 59200
+my_option_type = 'PE'
 count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
@@ -75,8 +75,8 @@ test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 test
 # abs(pt - presentp)/abs(present_p - p)
 
-p = 0.001
-p_l = -0.005
+p = 0.01
+p_l = -0.003
 exit = False
 target_breached = 0
 while exit == False:
