@@ -39,8 +39,10 @@ df_opt
 
 
 
-my_strike = int(sys.argv[1])
-my_option_type = str(sys.argv[2])
+# my_strike = int(sys.argv[1])
+# my_option_type = str(sys.argv[2])
+my_strike = 195
+my_option_type = 'CE'
 count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
@@ -82,7 +84,7 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.05
-            p_l = (p - present_p)
+        p_l = max((p - 3*present_p)/2,-0.03)
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
