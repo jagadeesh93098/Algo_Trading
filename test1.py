@@ -74,8 +74,9 @@ test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 # abs(pt - presentp)/abs(present_p - p)
 
 p = 0.05
-p_l = -0.03
+p_l = -0.01
 exit = False
+target_breached = 0
 while exit == False:
     response = feed.get_data()
     if response['security_id'] == opt_sid:
@@ -84,7 +85,10 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.05
-        p_l = max((p - 3*present_p)/2,-0.03)
+            p_l = max((p - 3*present_p)/2,p_l)
+            target_breached = 1
+    # if target_breached = 1:
+    #     p_l = max((p - 3*present_p)/2,p_l)
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
