@@ -36,7 +36,7 @@ feed.run_forever()
 response = feed.get_data()
 feed.close_connection()
 
-my_strike = 83000
+my_strike = 83200
 my_option_type = 'PE'
 
 opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
@@ -47,7 +47,7 @@ feed.run_forever()
 response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
-# buy_price = ltp
+buy_price = ltp
 # buy_price = 4.65
 
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
