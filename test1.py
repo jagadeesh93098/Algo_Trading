@@ -18,9 +18,9 @@ underlying = 'SENSEX'
 exch = 'BSE'
 instrument = 'INDEX'
 
-underlying_s_id = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'] == underlying),'SEM_SMST_SECURITY_ID'].item()
+underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'] == underlying),'SEM_SMST_SECURITY_ID'].item()
 
-underlying_s_id
+underlying_sid
 
 instrument = 'OPTIDX'
 
@@ -28,13 +28,12 @@ today_date
 
 df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
 
-instruments = [(0,str(underlying_s_id),15)]
+instruments = [(0,str(underlying_sid),15)]
 instruments
 
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
 response = feed.get_data()
-feed.close_connection()
 
 my_strike = 83500
 my_option_type = 'PE'
@@ -42,8 +41,9 @@ my_option_type = 'PE'
 opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
 instruments = [(8,str(opt_sid),15)]
-feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
-feed.run_forever()
+feed.subscribe_symbols(instruments)
+# feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
+# feed.run_forever()
 response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
