@@ -73,8 +73,8 @@ test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 test
 # abs(pt - presentp)/abs(present_p - p)
 
-p = 0.05
-p_l = -0.01
+p = 0.001
+p_l = -0.005
 exit = False
 target_breached = 0
 while exit == False:
@@ -83,7 +83,7 @@ while exit == False:
     test.loc[test['order_id'] == 't1','ltp'] = ltp
     present_p = (ltp - buy_price)/buy_price
     if present_p >= p:
-        p = present_p + 0.05
+        p = present_p + 0.005
         p_l = max((p - 3*present_p)/2,p_l)
         target_breached = 1
     if target_breached == 1:
