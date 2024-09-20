@@ -16,19 +16,23 @@ today_date = datetime.datetime.strftime(today,'%Y-%m-%d')
 
 today_date
 
-underlying = 'SENSEX'
-exch = 'BSE'
-instrument = 'INDEX'
+underlying = 'NATURALGAS'
+exch = 'MCX'
+instrument = 'FUTCOM'
 
-underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'] == underlying),'SEM_SMST_SECURITY_ID'].item()
+# df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID']
+
+underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID'].item()
 
 underlying_sid
 
-instrument = 'OPTIDX'
+instrument = 'OPTFUT'
 
 today_date
 
-df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
+df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),:].copy()
+
+df_opt
 
 # instruments = [(0,str(underlying_sid),15)]
 # instruments
@@ -38,7 +42,6 @@ df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == 
 my_strike = int(sys.argv[1])
 my_option_type = str(sys.argv[2])
 count = 0
-def place_order()
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
@@ -46,7 +49,7 @@ opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION
 
 opt_sid
 
-instruments = [(8,str(opt_sid),15)]
+instruments = [(5,str(opt_sid),15)]
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
 response = feed.get_data()
@@ -66,6 +69,8 @@ buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
+# abs(pt - presentp)/abs(present_p - p)
+
 p = 0.1
 p_l = -0.03
 exit = False
@@ -76,8 +81,8 @@ while exit == False:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
-            p_l = p_l + present_p - 0.05
             p = present_p + 0.05
+            p_l = (p - present_p)
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
