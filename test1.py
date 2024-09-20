@@ -89,7 +89,7 @@ while exit == False:
         p_t = present_p + 0.001
         target_breached = 1
     if target_breached == 1:
-        p_l = max((3*)/2, p_l)
+        p_l = max((3*present_p - p_t)/2, p_l)
     if ltp - buy_price > p_t*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
