@@ -28,11 +28,11 @@ today_date
 
 df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
 
-instruments = [(0,str(underlying_sid),15)]
-instruments
+# instruments = [(0,str(underlying_sid),15)]
+# instruments
 
 
-my_strike = 84000
+my_strike = 84100
 my_option_type = 'PE'
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
@@ -82,7 +82,8 @@ while exit == False:
             break
         if ltp - buy_price < p_l*buy_price:
             test.loc[test['order_id'] == 't1','ltp'] = ltp
-            print('Sold')
+            print('Sold based on Stop Loss')
+            print(f"Profit/Loss Booked = {p_l}")
             test.loc[test['order_id']=='t1','remark'] = 'Stop Loss'
             print(test)
             exit = True
@@ -93,5 +94,3 @@ while exit == False:
         print(f"Present Target Profit = {p}")
 
 feed.close_connection()
-
-present_p
