@@ -49,7 +49,7 @@ count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
-opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE'] == my_option_type),'SEM_SMST_SECURITY_ID'].item()
+opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE'] == my_option_type) & (df['SM_SYMBOL_NAME'] == 'CRUDEOIL'),'SEM_SMST_SECURITY_ID'].item()
 
 opt_sid
 
@@ -58,11 +58,11 @@ instruments = [(5,str(opt_sid),15)]
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
 response = feed.get_data()
-feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
-feed.run_forever()
-get_opt_ltp = False
+# feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
+# feed.run_forever()
+# get_opt_ltp = False
 # while get_opt_ltp == False:
-response = feed.get_data()
+# response = feed.get_data()
     # if response['security_id'] == opt_sid:
     #     get_opt_ltp = True
 
