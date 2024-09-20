@@ -32,7 +32,7 @@ instruments = [(0,str(underlying_sid),15)]
 instruments
 
 
-my_strike = 84100
+my_strike = 84000
 my_option_type = 'PE'
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
