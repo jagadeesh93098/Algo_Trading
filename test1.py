@@ -43,8 +43,8 @@ df_opt
 
 # my_strike = int(sys.argv[1])
 # my_option_type = str(sys.argv[2])
-my_strike = 5900
-my_option_type = 'PE'
+my_strike = 5950
+my_option_type = 'CE'
 count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
@@ -90,10 +90,10 @@ while exit == False:
         target_breached = 1
     if target_breached == 1:
         p_l = max((p_t - 3*present_p)/2, p_l)
-    if ltp - buy_price > p*buy_price :
+    if ltp - buy_price > p_t*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
-        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p}'
+        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p_t}'
         print(test)
         exit = True
         break
@@ -108,6 +108,6 @@ while exit == False:
     print(test)
     print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
     print(f"Present Stop Loss = {p_l}")
-    print(f"Present Target Profit = {p}")
+    print(f"Present Target Profit = {p_t}")
 
 feed.close_connection()
