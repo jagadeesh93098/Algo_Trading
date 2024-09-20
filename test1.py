@@ -47,14 +47,14 @@ feed.run_forever()
 response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
-buy_price = 149.7
-# buy_price = ltp
+# buy_price = 149.7
+buy_price = ltp
 
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
-p = 0.05
-p_l = -0.01
+p = 0.1
+p_l = -0.1
 exit = False
 while exit == False:
     response = feed.get_data()
