@@ -45,12 +45,12 @@ feed.subscribe_symbols(instruments)
 # feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 # feed.run_forever()
 get_opt_ltp = False
-whilte get_otp_ltp = False:
+while get_opt_ltp == False:
     response = feed.get_data()
     if response['security_id'] == opt_sid:
-        get_otp_ltp = True
+        get_opt_ltp = True
 
-response
+
 ltp = eval(response['LTP'])
 ltp
 # buy_price = 149.7
