@@ -52,8 +52,8 @@ response = feed.get_data()
 # if response['security_id'] == opt_sid:
 ltp = eval(response['LTP'])
 ltp
-# buy_price = 149.7
-buy_price = ltp
+buy_price = 185.7
+# buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
@@ -68,7 +68,7 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.05
-            p_l = present_p - 0.01
+            p_l = present_p - 0.05
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
