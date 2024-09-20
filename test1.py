@@ -47,7 +47,7 @@ feed.run_forever()
 response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
-buy_price = ltp
+# buy_price = ltp
 # buy_price = 4.65
 
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
@@ -62,12 +62,12 @@ while exit == False:
     test.loc[test['order_id'] == 't1','ltp'] = ltp
     present_p = (ltp - buy_price)/ltp
     if present_p >= p:
-        p = p + 0.05
+        p = p + 0.1
         p_l = present_p
     if ltp-buy_price >= p*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
-        test.loc[test['order_id'] == 't1','remark'] ='Profit_Booked'
+        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {present_p}'
         print(test)
         exit = True
         break
