@@ -1,12 +1,33 @@
 import pandas as pd
 from dhanhq import marketfeed
 import requests
+import datetime
 
 df = pd.read_csv('Dhan_Works/security.csv',low_memory = False)
 
-underlying_s_id = df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_INSTRUMENT_NAME'] == 'FUTCOM') & (df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS')) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')),'SEM_SMST_SECURITY_ID'].item()
+today = datetime.datetime.today().date()
 
-df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == 'MCX') & (df['SEM_INSTRUMENT_NAME'] == 'OPTFUT') & (df['SEM_TRADING_SYMBOL'].str.startswith('NATURALGAS')) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09-23')),:].copy()
+today_date = datetime.datetime.strftime(today,'%Y-%m-%d')
+
+today_date
+
+underlying = 'SENSEX'
+exch = 'BSE'
+instrument = 'INDEX'
+
+underlying_s_id = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'] == underlying),'SEM_SMST_SECURITY_ID'].item()
+
+underlying_s_id
+
+instrument = 'OPTIDX'
+
+today_date
+
+df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
+
+df_opt
+
+
 
 strike = 190
 
