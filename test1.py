@@ -69,14 +69,14 @@ response = feed.get_data()
 # if response['security_id'] == opt_sid:
 ltp = eval(response['LTP'])
 ltp
-# buy_price = 142.9
-buy_price = ltp
+# buy_price = 198.0
+# buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 test
 # abs(pt - presentp)/abs(present_p - p)
 
-p = 0.03
+p_t = 0.03
 p_l = -0.01
 exit = False
 target_breached = 0
@@ -85,12 +85,10 @@ while exit == False:
     ltp = eval(response['LTP'])
     test.loc[test['order_id'] == 't1','ltp'] = ltp
     present_p = (ltp - buy_price)/buy_price
-    if present_p >= p:
-        p = present_p + 0.005
-        p_l = max((p - 3*present_p)/2,p_l)
+    if present_p >= p_t:
+        p_t = present_p + 0.005
         target_breached = 1
-    if target_breached == 1:
-        p_l = max((p - 3*present_p)/2,p_l)
+        p_l = max((p_t - 3*)/2, p_l)
     if ltp - buy_price > p*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
