@@ -3,6 +3,7 @@ from dhanhq import marketfeed
 import requests
 import datetime
 import sys
+import time
 
 client_id = "1104088864"
 access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ"
@@ -94,5 +95,6 @@ while exit == False:
         print(f"Present Profit = {(ltp - buy_price)/(buy_price)}")
         print(f"Present Stop Loss = {p_l}")
         print(f"Present Target Profit = {p}")
+        time.sleep(10)
 
 feed.close_connection()
