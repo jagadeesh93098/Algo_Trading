@@ -43,17 +43,18 @@ df_opt
 
 # my_strike = int(sys.argv[1])
 # my_option_type = str(sys.argv[2])
-my_strike = 59200
+my_strike = 5900
 my_option_type = 'PE'
 count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
-opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
+opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE'] = =my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
 opt_sid
 
 instruments = [(5,str(opt_sid),15)]
+
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
 response = feed.get_data()
