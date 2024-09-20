@@ -63,8 +63,8 @@ buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
-p = 0.5
-p_l = -0.1
+p = 0.1
+p_l = -0.03
 exit = False
 while exit == False:
     response = feed.get_data()
@@ -73,8 +73,8 @@ while exit == False:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
-            p = present_p + 0.05
-            p_l = present_p - 0.1
+            p = present_p + 0.1
+            p_l = present_p - 0.05
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
