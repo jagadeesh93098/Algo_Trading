@@ -64,10 +64,10 @@ while exit == False:
     if present_p >= p:
         p = p + 0.1
         p_l = present_p
-    if ltp-buy_price >= p*buy_price :
+    if ltp - buy_price >= p*buy_price :
         test.loc[test['order_id'] == 't1','sell_price'] = ltp
         print('Sold')
-        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {present_p}'
+        test.loc[test['order_id'] == 't1','remark'] =f'Profit_Booked at {p}'
         print(test)
         exit = True
         break
