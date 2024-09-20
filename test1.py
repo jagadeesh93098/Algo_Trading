@@ -73,7 +73,7 @@ test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
 # abs(pt - presentp)/abs(present_p - p)
 
-p = 0.1
+p = 0.05
 p_l = -0.03
 exit = False
 while exit == False:
