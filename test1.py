@@ -49,7 +49,7 @@ count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
-opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE'] = =my_option_type),'SEM_SMST_SECURITY_ID'].item()
+opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE'] == my_option_type),'SEM_SMST_SECURITY_ID'].item()
 
 opt_sid
 
