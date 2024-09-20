@@ -37,6 +37,8 @@ df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == 
 
 my_strike = int(sys.argv[1])
 my_option_type = str(sys.argv[2])
+count = 0
+def place_order()
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
