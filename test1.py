@@ -35,7 +35,7 @@ feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, i
 feed.run_forever()
 response = feed.get_data()
 
-my_strike = 83500
+my_strike = 83600
 my_option_type = 'PE'
 
 opt_sid = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),'SEM_SMST_SECURITY_ID'].item()
