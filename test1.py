@@ -34,8 +34,8 @@ df_opt = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == 
 
 
 
-my_strike = sys.argv[1]
-my_option_type = sys.argv[2]
+my_strike = int(sys.argv[1])
+my_option_type = str(sys.argv[2])
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 
@@ -63,7 +63,7 @@ buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 
-p = 0.05
+p = 0.5
 p_l = -0.1
 exit = False
 while exit == False:
@@ -74,7 +74,7 @@ while exit == False:
         present_p = (ltp - buy_price)/buy_price
         if present_p >= p:
             p = present_p + 0.05
-            p_l = present_p - 0.02
+            p_l = present_p - 0.1
         if ltp - buy_price > p*buy_price :
             test.loc[test['order_id'] == 't1','sell_price'] = ltp
             print('Sold')
