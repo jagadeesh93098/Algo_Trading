@@ -36,7 +36,7 @@ feed.run_forever()
 response = feed.get_data()
 feed.close_connection()
 
-df_opt.loc[]
+df_opt.SEM_STRIKE_PRICE
 
 df_opt
 
