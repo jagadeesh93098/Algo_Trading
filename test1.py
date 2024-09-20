@@ -71,7 +71,7 @@ while exit == False:
         print(test)
         exit = True
         break
-    if ltp - buy_price <= p_l*buy_price:
+    if ltp - buy_price < p_l*buy_price:
         test.loc[test['order_id'] == 't1','ltp'] = ltp
         print('Sold')
         test.loc[test['order_id']=='t1','remark'] = 'Stop Loss'
