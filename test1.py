@@ -20,11 +20,11 @@ underlying = 'CRUDE'
 exch = 'MCX'
 instrument = 'FUTCOM'
 
-# df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID']
+# df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,:]
 
-underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID'].item()
+# underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID']
 
-underlying_sid
+# underlying_sid
 
 instrument = 'OPTFUT'
 
