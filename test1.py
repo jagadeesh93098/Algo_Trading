@@ -43,8 +43,8 @@ df_opt
 
 # my_strike = int(sys.argv[1])
 # my_option_type = str(sys.argv[2])
-my_strike = 5900
-my_option_type = 'PE'
+my_strike = 5950
+my_option_type = 'CE'
 count = 0
 
 df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
@@ -70,7 +70,7 @@ response = feed.get_data()
 ltp = eval(response['LTP'])
 ltp
 # buy_price = 198.0
-# buy_price = ltp
+buy_price = ltp
 test = pd.DataFrame({'order_id':[],'buyPrice':[],'buyqty':[],'sell_price':[],'ltp':[],'remark' : []})
 test.loc[len(test.index)] = ['t1',buy_price,1,None,ltp,None]
 test
