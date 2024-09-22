@@ -7,7 +7,6 @@ This is a temporary script file.
 
 import pandas as pd
 import numpy as np
-# import matp1lotlib.pyplot as plt
 import math
 
 def calculate_price(price,percentage):
@@ -15,7 +14,7 @@ def calculate_price(price,percentage):
 
 step = 0.05
 
-test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'BUY_PRICE':[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"SL_PRICE":[],'TP_PRICE':[]})
+test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'BUY_PRICE':[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"TRIGGER_PRICE":[],"SL_PRICE":[],'TP_PRICE':[]})
 for test in range(0,1000):
     ltp = np.random.randint(10,100)
     r = np.random.rand()
@@ -28,7 +27,7 @@ for test in range(0,1000):
     tp_price = calculate_price(ltp, 0.1)
     slp = (sl_price - ltp)/ltp
     tpp = (tp_price - ltp)/ltp
-    df = pd.DataFrame({'BUY_PRICE':[ltp],'LTP':[ltp],"PP":[0],"SLP":[slp],"TPP":[tpp],"SL_PRICE":[sl_price],'TP_PRICE':[tp_price]})
+    df = pd.DataFrame({'BUY_PRICE':[ltp],'LTP':[ltp],"PP":[0],"SLP":[slp],"TPP":[tpp],"SL_PRICE":[sl_price],"TRIGGER_PRICE":[sl_price+step],'TP_PRICE':[tp_price]})
 
     for i in range(0,50):
         temp = np.random.rand()
@@ -39,6 +38,7 @@ for test in range(0,1000):
         tpp = df.loc[i,'TPP']
         sl_price = df.loc[i,'SL_PRICE']
         tp_price = df.loc[i,'TP_PRICE']
+        trigger_price = df.loc[i,"TRIGGER_PRICE"]
         if temp < 0.5:
             ltp = ltp - step*math.floor((temp/0.05))
         else:
@@ -47,18 +47,19 @@ for test in range(0,1000):
         if tpp <= pp:
             tpp = pp + 0.05
             tp_price = calculate_price(b_price, tpp)
-        if ltp <= sl_price:
+        if ltp <= trigger_price:
             pp = slp
-            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,ltp,tp_price]
+            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,ltp,trigger_price,tp_price]
             # print(df)
             break
         slp = max(slp,(3*pp - tpp)/2)
         sl_price = calculate_price(b_price, slp)
+        trigger_price = sl_price + step
         slp = (sl_price - b_price)/sl_price
         if i==59:
             slp = pp
             sl_price = ltp
-        df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,sl_price,tp_price]
+        df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,sl_price,trigger_price,tp_price]
     t = [test]
     t.append(i)
     t.extend(list(df.loc[i+1,:]))
