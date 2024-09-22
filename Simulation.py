@@ -25,7 +25,7 @@ def calculate_qty(I,price):
 
 start = time.time()
 test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'FUNDS':[],'Invested':[],'BUY_PRICE':[],"QTY":[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"SL_PRICE":[],"TRIGGER_PRICE":[],'TP_PRICE':[],"SELL_VALUE":[],"P/L":[]})
-for test in range(0,20*2):
+for test in range(0,20*24):
     ltp = np.random.randint(10,100)
     r = np.random.rand()
     if r>=0.05:
@@ -43,7 +43,7 @@ for test in range(0,20*2):
     slp = (sl_price - ltp)/ltp
     tpp = (tp_price - ltp)/ltp
     df = pd.DataFrame({'INVESTED':[Invest],'BUY_PRICE':[ltp],"QTY":[qty],'LTP':[ltp],"PP":[0],"SLP":[slp],"TPP":[tpp],"SL_PRICE":[sl_price],"TRIGGER_PRICE":[sl_price+step],'TP_PRICE':[tp_price],"SELL_VALUE":[np.nan],'P/L':[np.nan]})
-    for i in range(0,25):
+    for i in range(0,50):
         temp = np.random.rand()
         b_price = df.loc[i,'BUY_PRICE']
         ltp = df.loc[i,'LTP']
@@ -73,7 +73,7 @@ for test in range(0,20*2):
         sl_price = calculate_price(b_price, slp)
         trigger_price = sl_price + step
         slp = (sl_price - b_price)/b_price
-        if i==24:
+        if i==49:
             pp = slp
             sl_price = ltp
             df.loc[len(df.index)] = [Invest,b_price,qty,ltp,pp,pp,tpp,sl_price,trigger_price,tp_price,sl_price*qty - 40,sl_price*qty - b_price*qty - 40]
