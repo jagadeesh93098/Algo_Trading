@@ -17,7 +17,7 @@ step = 0.05
 
 start = time.time()
 test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'BUY_PRICE':[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"TRIGGER_PRICE":[],"SL_PRICE":[],'TP_PRICE':[]})
-for test in range(0,1000):
+for test in range(0,10):
     ltp = np.random.randint(10,100)
     r = np.random.rand()
     if r>=0.05:
@@ -51,7 +51,8 @@ for test in range(0,1000):
             tp_price = calculate_price(b_price, tpp)
         if ltp <= trigger_price:
             pp = slp
-            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,trigger_price,slp,tp_price]
+            ltp = sl_price
+            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,sl_price,trigger_price,tp_price]
             # print(df)
             break
         slp = max(slp,(3*pp - tpp)/2)
@@ -61,7 +62,8 @@ for test in range(0,1000):
         if i==49:
             slp = pp
             sl_price = ltp
-        df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,trigger_price,sl_price,tp_price]
+            trigger_price = ltp
+        df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,sl_price,trigger_price,tp_price]
     t = [test]
     t.append(i)
     t.extend(list(df.loc[i+1,:]))
@@ -86,3 +88,21 @@ print("\n")
 print(test_d.loc[test_d['PP']<0,:])
 
 print(f"\nThe Entire Time Taken = {time.time()-start}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+df
