@@ -5,6 +5,7 @@ Spyder Editor
 This is a temporary script file.
 """
 
+import time
 import pandas as pd
 import numpy as np
 import math
@@ -14,6 +15,7 @@ def calculate_price(price,percentage):
 
 step = 0.05
 
+start = time.time()
 test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'BUY_PRICE':[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"TRIGGER_PRICE":[],"SL_PRICE":[],'TP_PRICE':[]})
 for test in range(0,1000):
     ltp = np.random.randint(10,100)
@@ -82,3 +84,5 @@ r = list(test_d.loc[test_d['PP']<0,'PP'])
 print(f"Average Loss Per Trade = {sum(r)/len(r)}")
 print("\n")
 print(test_d.loc[test_d['PP']<0,:])
+
+print(f"\nThe Entire Time Taken = {time.time()-start}")
