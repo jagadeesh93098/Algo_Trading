@@ -84,7 +84,7 @@ for test in range(0,20*24):
     t.append(fund)
     t.extend(list(df.loc[i+1,:]))
     test_d.loc[len(test_d.index)] = t  
-    print(f'Test Number :{test+1} Completed')
+    # print(f'Test Number :{test+1} Completed')
     # print(df)
 test_d
 print("\n")
@@ -105,4 +105,4 @@ print(test_d.loc[test_d['PP']<0,:])
 
 print(f"\nThe Entire Time Taken = {time.time()-start}")
 
-print(test_d.loc[len(test_d.index)-1,'FUNDS'].item()/(10000000)
+print(test_d.loc[len(test_d.index)-1,'FUNDS'].item()/(10000000))
