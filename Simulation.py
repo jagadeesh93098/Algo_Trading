@@ -17,7 +17,7 @@ step = 0.05
 
 start = time.time()
 test_d = pd.DataFrame({"Test Number":[],'Obs Num':[],'BUY_PRICE':[],'LTP':[],"PP":[],"SLP":[],"TPP":[],"TRIGGER_PRICE":[],"SL_PRICE":[],'TP_PRICE':[]})
-for test in range(0,10):
+for test in range(0,1000):
     ltp = np.random.randint(10,100)
     r = np.random.rand()
     if r>=0.05:
