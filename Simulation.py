@@ -62,10 +62,9 @@ for test in range(0,1000):
         if i==49:
             pp = slp
             sl_price = ltp
-            trigger_price = ltp
         df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,sl_price,trigger_price,tp_price]
     t = [test]
-    t.append(i)
+    t.append(i+1)
     t.extend(list(df.loc[i+1,:]))
     test_d.loc[len(test_d.index)] = t  
     # print(f'Test Number :{test+1} Completed')
