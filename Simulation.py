@@ -105,4 +105,4 @@ print(test_d.loc[test_d['PP']<0,:])
 
 print(f"\nThe Entire Time Taken = {time.time()-start}")
 
-test_d.loc[len(test_d.index)-1,'FUNDS'].item()/(100000)
+print(test_d.loc[len(test_d.index)-1,'FUNDS'].item()/(10000000)
