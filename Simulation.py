@@ -51,7 +51,7 @@ for test in range(0,1000):
             tp_price = calculate_price(b_price, tpp)
         if ltp <= trigger_price:
             pp = slp
-            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,trigger_price,slp,tp_price]
+            df.loc[len(df.index)] = [b_price,ltp,pp,pp,tpp,trigger_price,sl_price,tp_price]
             # print(df)
             break
         slp = max(slp,(3*pp - tpp)/2)
@@ -59,7 +59,7 @@ for test in range(0,1000):
         trigger_price = sl_price + step
         slp = (sl_price - b_price)/sl_price
         if i==49:
-            slp = pp
+            pp = slp
             sl_price = ltp
         df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,trigger_price,sl_price,tp_price]
     t = [test]
