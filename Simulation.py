@@ -58,7 +58,7 @@ for test in range(0,1000):
         sl_price = calculate_price(b_price, slp)
         trigger_price = sl_price + step
         slp = (sl_price - b_price)/sl_price
-        if i==59:
+        if i==49:
             slp = pp
             sl_price = ltp
         df.loc[len(df.index)] = [b_price,ltp,pp,slp,tpp,sl_price,trigger_price,tp_price]
