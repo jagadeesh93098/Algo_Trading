@@ -94,9 +94,13 @@ i_tpp = 0.2
 i_slp = -0.1
 
 sl_price = calculate_price(buy_price,i_slp)
+sl_price
 tp_price = calculate_price(buy_price,i_tpp)
+tp_price
 slp = (sl_price - buy_price)/buy_price
+slp
 tpp = (tp_price - buy_price)/buy_price
+tpp
 trigger = sl_price + step
 pp=0
 
