@@ -60,7 +60,7 @@ try:
         tick_df.loc[len(tick_df.index)] = [tick,open,high,low,close]
         tick += 1
         print(tick_df)
-        print(f"Time for a single tick = {time.time() - start}")
+        print(f"Time for a single tick (10 LTPS) = {time.time() - start}")
 except KeyboardInterrupt:
     feed.close_connection()
 
