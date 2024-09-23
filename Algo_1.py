@@ -100,6 +100,7 @@ tpp = (tp_price - buy_price)/buy_price
 trigger = sl_price + step
 pp=0
 
+
 # abs(pt - presentp)/abs(present_p - p)
 
 # Open the Loop
