@@ -25,26 +25,25 @@ df = pd.read_csv(url,low_memory = False)
 
 today = datetime.datetime.today().date()
 
-today_date = datetime.datetime.strftime(today,'%Y-%m-%d')
 
-today_date
 
-# underlying = 'CRUDE'
-# exch = 'MCX'
-# instrument = 'OPTFUT'
-# instrument = 'FUTCOM'
+underlying = 'CRUDE'
+exch = 'MCX'
+instrument = 'OPTFUT'
+instrument = 'FUTCOM'
+today_date = datetime.datetime.strftime(today,'%Y-%m')
 
-# df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,:]
-# underlying_sid = df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith('2024-09')) ,'SEM_SMST_SECURITY_ID']
-# underlying_sid
-
-underlying = sys.argv[1]
+# underlying = sys.argv[1]
 # underlying = 'BANKEX'
-instrument = 'OPTIDX'
+# instrument = 'OPTIDX'
+# today_date = datetime.datetime.strftime(today,'%Y-%m-%d')
+# today_date
 
 # df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:]
 
-df_opt = df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
+df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)),:]
+
+df_opt = df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
 
 df_opt
 
