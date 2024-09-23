@@ -27,7 +27,8 @@ today = datetime.datetime.today().date()
 
 
 
-underlying = 'NATURALGAS'
+# underlying = 'NATURALGAS'
+underlying = sys.argv[1]
 exch = 'MCX'
 instrument = 'OPTFUT'
 today_date = datetime.datetime.strftime(today,'%Y-%m')
@@ -49,11 +50,11 @@ df_opt = df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYM
 
 df_opt
 
-# my_strike = int(sys.argv[2])
-# my_option_type = str(sys.argv[3])
+my_strike = int(sys.argv[2])
+my_option_type = str(sys.argv[3])
 
-my_strike = 205
-my_option_type = 'CE'
+# my_strike = 205
+# my_option_type = 'CE'
 
 my_option = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 my_option
@@ -87,11 +88,11 @@ try :
 except FileNotFoundError:
     order_id = 'O_1'
 
-# i_tpp = float(sys.argv[4])
-# i_slp = float(sys.argv[5])
+i_tpp = float(sys.argv[4])
+i_slp = float(sys.argv[5])
 
-i_tpp = 0.2
-i_slp = -0.1
+# i_tpp = 0.2
+# i_slp = -0.1
 
 sl_price = calculate_price(buy_price,i_slp)
 sl_price
