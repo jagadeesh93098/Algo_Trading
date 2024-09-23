@@ -1,5 +1,6 @@
 import pandas as pd
 from dhanhq import marketfeed
+import time
 
 url = 'security.csv'
 
@@ -37,6 +38,7 @@ tick_df = pd.DataFrame({'tick_num':[],'open':[],'high':[],'low':[],'close':[]})
 try:
     feed.run_forever()
     tick = 0
+    start = time.time()
     while True:
         count = 0
         response = feed.get_data()
@@ -58,6 +60,7 @@ try:
         tick_df.loc[len(tick_df.index)] = [tick,open,high,low,close]
         tick += 1
         print(tick_df)
+        print(f"Time for a single tick = {time.time() - start}")
 except KeyboardInterrupt:
     feed.close_connection()
 
