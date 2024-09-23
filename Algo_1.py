@@ -27,7 +27,7 @@ today = datetime.datetime.today().date()
 
 
 
-underlying = 'CRUDE'
+underlying = 'NATURALGAS'
 exch = 'MCX'
 instrument = 'OPTFUT'
 today_date = datetime.datetime.strftime(today,'%Y-%m')
@@ -52,24 +52,29 @@ df_opt
 # my_strike = int(sys.argv[2])
 # my_option_type = str(sys.argv[3])
 
-my_strike = 13150
-my_option_type = 'PE'
+my_strike = 210
+my_option_type = 'CE'
 
 my_option = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
+my_option
 opt_sid = my_option.loc[:,'SEM_SMST_SECURITY_ID'].item()
 lot_size = my_option.loc[:,'SEM_LOT_UNITS'].item()
 
 if underlying == 'MIDCPNIFTY':
     instruments = [(2,str(opt_sid),15)]
 else:
-    instruments = [(8,str(opt_sid),15)]
+    instruments = [(5,str(opt_sid),15)]
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 feed.run_forever()
 response = feed.get_data()
 
+response
+
 ltp = eval(response['LTP'])
 # ltp = 52.95
 buy_price = ltp
+
+ltp
 
 fund = 10000
 qty = calculate_qty(fund,ltp)
