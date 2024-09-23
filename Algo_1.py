@@ -90,8 +90,8 @@ except FileNotFoundError:
 # i_tpp = float(sys.argv[4])
 # i_slp = float(sys.argv[5])
 
-i_tpp = 0.1
-i_slp = -0.05
+i_tpp = 0.02
+i_slp = -0.01
 
 sl_price = calculate_price(buy_price,i_slp)
 tp_price = calculate_price(buy_price,i_tpp)
