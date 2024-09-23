@@ -25,7 +25,7 @@ df_opt.reset_index(inplace = True, drop = True)
 
 strike = 210
 option_type = 'PE'
-
+trading_symbol = df_opt.loc[(df_opt['SEM_OPTION_TYPE'] == option_type) & (df_opt['SEM_STRIKE_PRICE'] == strike),'SEM_TRADING_SYMBOL'].item()
 opt_sid = df_opt.loc[(df_opt['SEM_OPTION_TYPE'] == option_type) & (df_opt['SEM_STRIKE_PRICE'] == strike),'SEM_SMST_SECURITY_ID'].item()
 
 
@@ -33,13 +33,13 @@ instruments = [(5,str(opt_sid),15)]
 
 feed = marketfeed.DhanFeed(client_id = client_id, access_token = access_token, instruments = instruments)
 
-tick_df = pd.DataFrame({'tick_num':[],'open':[],'high':[],'low':[],'close':[]})
+tick_df = pd.DataFrame({'tick_num':[],'trading_symbol':[],'open':[],'high':[],'low':[],'close':[]})
 
 try:
     feed.run_forever()
     tick = 0
-    start = time.time()
     while True:
+        start = time.time()
         count = 0
         response = feed.get_data()
         ltp = response['LTP']
@@ -57,11 +57,11 @@ try:
                 low = ltp
             if count == 9:
                 close = ltp
-        tick_df.loc[len(tick_df.index)] = [tick,open,high,low,close]
+        tick_df.loc[len(tick_df.index)] = [tick,trading_symbol,open,high,low,close]
         tick += 1
         print(tick_df)
         print(f"Time for a single tick (10 LTPS) = {time.time() - start}")
 except KeyboardInterrupt:
     feed.close_connection()
 
-print(tick_df)
+tick_df.to_csv('test_tick_data.csv',index=False)
