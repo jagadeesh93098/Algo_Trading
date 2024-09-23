@@ -30,8 +30,8 @@ today = datetime.datetime.today().date()
 underlying = 'CRUDE'
 exch = 'MCX'
 instrument = 'OPTFUT'
-instrument = 'FUTCOM'
 today_date = datetime.datetime.strftime(today,'%Y-%m')
+
 
 # underlying = sys.argv[1]
 # underlying = 'BANKEX'
@@ -41,23 +41,24 @@ today_date = datetime.datetime.strftime(today,'%Y-%m')
 
 # df.loc[(df['SEM_EXM_EXCH_ID'] == exch) & (df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.startswith(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:]
 
-df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)),:]
+temp = list(df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)),'SEM_EXPIRY_DATE'].unique())
 
-df_opt = df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)) & (df['SEM_EXPIRY_DATE'].str.startswith(today_date)),:].copy()
+expiry_date = temp[0]
+
+df_opt = df.loc[(df['SEM_INSTRUMENT_NAME'] == instrument) & (df['SEM_TRADING_SYMBOL'].str.contains(underlying)) & (df['SEM_EXPIRY_DATE'] == expiry_date),:].copy()
 
 df_opt
 
-my_strike = int(sys.argv[2])
-my_option_type = str(sys.argv[3])
+# my_strike = int(sys.argv[2])
+# my_option_type = str(sys.argv[3])
 
-# my_strike = 13150
-# my_option_type = 'PE'
-
-
+my_strike = 13150
+my_option_type = 'PE'
 
 my_option = df_opt.loc[(df_opt['SEM_STRIKE_PRICE'] == my_strike) & (df['SEM_OPTION_TYPE']==my_option_type),:]
 opt_sid = my_option.loc[:,'SEM_SMST_SECURITY_ID'].item()
 lot_size = my_option.loc[:,'SEM_LOT_UNITS'].item()
+
 if underlying == 'MIDCPNIFTY':
     instruments = [(2,str(opt_sid),15)]
 else:
