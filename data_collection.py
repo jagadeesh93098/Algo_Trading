@@ -114,7 +114,11 @@ r_json = json.dumps(payload)
 os.chdir(f'data/{today_date}')
 os.getcwd()
 
+print("\n")
 
+field_names = ['SECURITY_ID', 'LTP', 'LTQ', 'LTT', 'ATP', 'VOLUME', 'TOTAL_SELL_QTY', 'TOTAL_BUY_QTY', 'OI', 'HIGHEST_OI', 'LOWEST_OI', 'DAY_OPEN_VALUE', 'DAY_CLOSE_VALUE', 'DAY_HIGH_VALUE', 'DAY_LOW_VALUE', 'DEPTH_1', 'DEPTH_2', 'DEPTH_3', 'DEPTH_4', 'DEPTH_5']
+
+msg = ""
 async def get_data(client_id,access_token):
     global r_json,msg,df_securitys
     url = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
@@ -134,14 +138,22 @@ async def get_data(client_id,access_token):
                 opt_name = opt_name.replace(" ","_")
                 sub_dir = opt_name.split('_')[0]
                 file_name = f"{sub_dir}/{opt_name}.csv"
-                if f"{opt_name}.csv" in [i for i in os.listdir(sub_dir)]:
-                    with open(file_name,mode = 'a',new_line = '') as f:
-                        writer = csv.DictWriter(f,fieldnames = FP.field_names)
-                        writer.writerow(result)
-                else:
-                    with open(file_name,mode = 'w', new_line = '') as f:
-                        writer = csv.DictWriter(f,fieldnames=FP.field_names)
+                print(f"Option Name = {opt_name}")
+                print(f"File_Name = {file_name}")
+                print(f"Sub Dir = {sub_dir}")
+                if f"{opt_name}.csv" not in [i for i in os.listdir(sub_dir)]:
+                    with open(file_name,mode = 'w', newline = '') as file:
+                        writer = csv.DictWriter(file,fieldnames = field_names)
                         writer.writeheader()
+
+                print("Option_data_file_present")
+                with open(file_name,mode = 'a',newline= '') as file:
+                    print("Entered_Writing_LOOP")
+                    print("In the LOOP\n")
+                    print(result)
+                    writer = csv.DictWriter(file,fieldnames = field_names)
+                    writer.writerow(result)
+            
 
 if sys.argv[1] == 'collect':
     asyncio.run(get_data(client_id=client_id,access_token=access_token))
