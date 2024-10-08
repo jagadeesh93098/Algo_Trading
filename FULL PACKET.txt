@@ -1,0 +1,25 @@
+	FULL PACKET
+8	0-8	[ ] array	8	Response Header with code 4 Refer to enum for values	BHBI		BHBI
+4	9-12	float32	4	Latest Traded Price of the subscribed instrument	f		BHBIf
+2	13-14	int16	2	Last Traded Quantity	H		BHBIfH
+4	15-18	int32	4	Last Trade Time (LTT)	I		BHBIfHI
+4	19-22	float32	4	Average Trade Price (ATP)	f		BHBIfHIf
+4	23-26	int32	4	Volume	I		BHBIfHIfI
+4	27-30	int32	4	Total Sell Quantity	I		BHBIfHIfII
+4	31-34	int32	4	Total Buy Quantity	I		BHBIfHIfIII
+4	35-38	float32	4	Open Interest in the contract (for Derivatives)	f		BHBIfHIfIIIf
+0	39-42	float32	4	Highest Open Interest for the da (only for NSE_FNO)	f	x	BHBIfHIfIIIff
+0	43-46	float32	4	Lowest Open Interest for the day (only for NSE_FNO)	f	x	BHBIfHIfIIIfff
+4	43-46	float32	4	Day Open Value	f		BHBIfHIfIIIffff
+0	47-50	float32	4	Day Close Value - only sent post market close	f	x	BHBIfHIfIIIfffff
+4	51-54	float32	4	Day High Value	f		BHBIfHIfIIIffffff
+4	55-58	float32	4	Day Low Value	f		BHBIfHIfIIIfffffff
+100	59-158	Market Depth Structure	100	5 packets of 20 bytes each for each instrument in below provided structure
+150
+
+	1-4	int32	4	Bid Quantity	I	IIHHff
+	5-8	int32	4	Ask Quantity	I
+	9-10	int16	2	No. of Bid Orders	H
+	11-12	int16	2	No. of Ask Orders	H
+	13-16	float32	4	Bid Price	f
+	17-20	float32	4	Ask Price	f
