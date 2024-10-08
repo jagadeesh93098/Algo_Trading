@@ -1,5 +1,0 @@
-{
-    "gitdoc.enabled": true,
-    "python.REPL.enableREPLSmartSend": false,
-    "python.languageServer": "Pylance"
-}
