@@ -129,22 +129,19 @@ async def get_data(client_id,access_token):
             if temp != msg:
                 msg = temp
                 result = FP.process_msg(temp)
-                temp_name = df_securitys.loc[df_securitys['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
-                print(f"{temp_name} - {result}")
-                # name = temp_name.replace(" ","_")
-                # sub_dir = f"{name.split('_')[0]}"
-                # os.chdir(sub_dir)
-                # file_name = f"{name}.csv"
-                # if file_name in [i for i in os.listdir()]:
-                #     with open(file_name,mode = 'a',new_line = '') as f:
-                #         writer = csv.DictWriter(f,fieldnames = FP.field_names)
-                #         writer.writerow(result)
-                #     os.chdir(f"data/{today_date}")
-                # else:
-                #     with open(file_name,mode = 'w', new_line = '') as f:
-                #         writer = csv.DictWriter(f,fieldnames=FP.field_names)
-                #         writer.writeheader()
-                #     os.chdir(f"data/{today_date}")
+                opt_name = df_securitys.loc[df_securitys['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
+                print(f"{opt_name} - {result}")
+                opt_name = opt_name.replace(" ","_")
+                sub_dir = opt_name.split('_')[0]
+                file_name = f"{sub_dir}/{opt_name}.csv"
+                if f"{opt_name}.csv" in [i for i in os.listdir(sub_dir)]:
+                    with open(file_name,mode = 'a',new_line = '') as f:
+                        writer = csv.DictWriter(f,fieldnames = FP.field_names)
+                        writer.writerow(result)
+                else:
+                    with open(file_name,mode = 'w', new_line = '') as f:
+                        writer = csv.DictWriter(f,fieldnames=FP.field_names)
+                        writer.writeheader()
 
 if sys.argv[1] == 'collect':
     asyncio.run(get_data(client_id=client_id,access_token=access_token))
