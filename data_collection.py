@@ -8,10 +8,13 @@ import datetime
 import json
 import FULL_PACKET as FP
 import asyncio
+import sys
 
 today = datetime.datetime.today()
 today_date = datetime.datetime.strftime(today,"%Y%m%d")
 print(f"Today Date = {today_date}")
+
+df_securitys = pd.read_csv('temp_data/securitys.csv',low_memory=False)
 
 client_id = "1104088864"
 access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkaGFuIiwicGFydG5lcklkIjoiIiwiZXhwIjoxNzI5MTExMjIxLCJ0b2tlbkNvbnN1bWVyVHlwZSI6IlNFTEYiLCJ3ZWJob29rVXJsIjoiIiwiZGhhbkNsaWVudElkIjoiMTEwNDA4ODg2NCJ9.COQOjTvQ0Cmmjs660wwgYd1jnmi34_wla-keJue08L0-Gv4kGarBedXHOJ9i06kRprRqZOM4u1NtLleZcbKSRQ"
@@ -25,33 +28,30 @@ security_ids = {
         'SENSEX':51,
     }
 
+# CHECKING IF DATE FOLDER IS PRESENT IN DATA
 main_path = os.getcwd()
+os.chdir('data')
+if today_date not in [i for i in os.listdir() if os.path.isdir(i)]:
+    os.mkdir(today_date)
+os.chdir(today_date)
 
-underlyings = list(security_ids.keys())
-dirs = [i for i in os.listdir() if os.path.isdir(i)]
+underlyings = ['BANKNIFTY']
+# underlyings = list(security_ids.keys())
 
-# if "data" not in dirs:
-#     os.mkdir("data")
+print("\nUnderlyings Selected are as Follows")
+print(underlyings)
+print("\n")
 
-# os.chdir("data")
-
-# temp_dir = [i for i in os.listdir() if os.path.isdir(i)]
-# if today_date not in temp_dir:
-#         os.mkdir(today_date)
-# os.chdir(today_date)
-# for i in underlyings:
-#      if i not in [i for i in os.listdir() if os.path.isdir(i)]:
-#           os.mkdir(i)
-
-# os.chdir(main_path)
+for i in underlyings:
+    if i not in [i for i in os.listdir() if os.path.isdir(i)]:
+        os.mkdir(i)
+os.chdir(main_path)
 
 # GET MARKET QUOTE FOR UNDERLYINGS
 
 underlyings_security_id = []
 for underlying in underlyings:
     underlyings_security_id.append(security_ids[underlying])
-
-underlyings_security_id
 
 market_quote_url = "https://api.dhan.co/v2/marketfeed/ltp"
 header = {
@@ -78,14 +78,17 @@ for i in result_keys:
     #  print(idx_name)
      ltps[idx_name] = result[str(i)]['last_price']
 
-for i in ltps.keys():
-     print(i,round(ltps[i]*0.98,2),ltps[i],round(ltps[i]*1.02,2))
-ltps
+print("LTPs of the UNDERLYINGS SELECTED")
+print(f"{ltps}\n")
 
-data =[]
+print("Ranges between which strikes are considered for Collection of Data")
 for i in ltps.keys():
-    df_a = pd.read_csv(f"temp_data/{i}.csv")
-    df_temp = df_a.loc[(df_a['SEM_STRIKE_PRICE']<=ltps[i]*1.02) & (df_a['SEM_STRIKE_PRICE']>=ltps[i]*0.98),:].copy()
+    print(i,round(ltps[i]*0.98,2),ltps[i],round(ltps[i]*1.02,2),"\n")
+
+payload_data =[]
+for i in ltps.keys():
+    df_oc = pd.read_csv(f"temp_data/{i}.csv")
+    df_temp = df_oc.loc[(df_oc['SEM_STRIKE_PRICE']<=ltps[i]*1.02) & (df_oc['SEM_STRIKE_PRICE']>=ltps[i]*0.98),:].copy()
     df_temp.reset_index(inplace = True,drop = True)
     exch = ""
     if i == 'NIFTY' or i == 'FINNIFTY' or i == 'MIDCPNIFTY' or i == 'BANKNIFTY':
@@ -94,24 +97,26 @@ for i in ltps.keys():
         exch = "BSE_FNO"
     for j in list(df_temp['SEM_SMST_SECURITY_ID']):
         temp = {"ExchangeSegment":exch,"SecurityId":str(j)}
-        data.append(temp)
+        payload_data.append(temp)
 
-data
+print(f"The Total Number of Instruments = {len(payload_data)}\n")
+for i in payload_data:
+    print(i)
 
 payload = {
     "RequestCode":21,
-    "InstrumentCount":len(data),
-    "InstrumentList":data
+    "InstrumentCount":len(payload_data),
+    "InstrumentList":payload_data
 }
-
 
 r_json = json.dumps(payload)
 
+os.chdir(f'data/{today_date}')
+os.getcwd()
 
-# os.chdir(f'data/{today_date}')
 
 async def get_data(client_id,access_token):
-    global opt_sid,r_json,msg,df
+    global r_json,msg,df_securitys
     url = f"wss://api-feed.dhan.co?version=2&token={access_token}&clientId={client_id}&authType=2"
     async with websockets.connect(uri = url,close_timeout=2) as ws:
         await ws.send(r_json)
@@ -124,7 +129,7 @@ async def get_data(client_id,access_token):
             if temp != msg:
                 msg = temp
                 result = FP.process_msg(temp)
-                temp_name = df.loc[df['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
+                temp_name = df_securitys.loc[df_securitys['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
                 print(f"{temp_name} - {result}")
                 # name = temp_name.replace(" ","_")
                 # sub_dir = f"{name.split('_')[0]}"
@@ -141,4 +146,5 @@ async def get_data(client_id,access_token):
                 #         writer.writeheader()
                 #     os.chdir(f"data/{today_date}")
 
-asyncio.run(get_data(client_id=client_id,access_token=access_token))
+if sys.argv[1] == 'collect':
+    asyncio.run(get_data(client_id=client_id,access_token=access_token))
