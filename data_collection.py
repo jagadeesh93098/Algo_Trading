@@ -35,7 +35,7 @@ if today_date not in [i for i in os.listdir() if os.path.isdir(i)]:
     os.mkdir(today_date)
 os.chdir(today_date)
 
-underlyings = ['NIFTY','BANKNIFTY']
+underlyings = ['NIFTY','BANKNIFTY','SENSEX','MIDCPNIFTY','FINNIFTY','BANKEX']
 # underlyings = list(security_ids.keys())
 
 print("\nUnderlyings Selected are as Follows")
