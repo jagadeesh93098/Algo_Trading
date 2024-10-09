@@ -5,7 +5,7 @@ import ast
 
 df = pd.read_csv("temp_test_data_2.csv")
 
-temp = df.loc[3,'msg']
+temp = df.loc[2,'msg']
 
 len(ast.literal_eval(temp))
-struct.unpack("<BHBI",ast.literal_eval(temp)[0:8])
+list(struct.unpack("<B",ast.literal_eval(temp)[0:1]))

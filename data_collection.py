@@ -129,26 +129,28 @@ async def get_data(client_id,access_token):
                 temp = await asyncio.wait_for(ws.recv(),timeout=2)
                 if temp != msg:
                     msg = temp
-                    result = FP.process_msg(temp)
-                    opt_name = df_securitys.loc[df_securitys['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
-                    print(f"{opt_name} - {result}")
-                    opt_name = opt_name.replace(" ","_")
-                    sub_dir = opt_name.split('_')[0]
-                    file_name = f"{sub_dir}/{opt_name}.csv"
-                    print(f"Option Name = {opt_name}")
-                    print(f"File_Name = {file_name}")
-                    print(f"Sub Dir = {sub_dir}")
-                    if f"{opt_name}.csv" not in [i for i in os.listdir(sub_dir)]:
-                        with open(file_name,mode = 'w', newline = '') as file:
+                    rp = list(struct.unpack('<B',msg[0:1]))
+                    if rp[0] == 8:
+                        result = FP.process_msg(temp)
+                        opt_name = df_securitys.loc[df_securitys['SEM_SMST_SECURITY_ID'] == result['SECURITY_ID'],'SEM_CUSTOM_SYMBOL'].item()
+                        print(f"{opt_name} - {result}")
+                        opt_name = opt_name.replace(" ","_")
+                        sub_dir = opt_name.split('_')[0]
+                        file_name = f"{sub_dir}/{opt_name}.csv"
+                        print(f"Option Name = {opt_name}")
+                        print(f"File_Name = {file_name}")
+                        print(f"Sub Dir = {sub_dir}")
+                        if f"{opt_name}.csv" not in [i for i in os.listdir(sub_dir)]:
+                            with open(file_name,mode = 'w', newline = '') as file:
+                                writer = csv.DictWriter(file,fieldnames = field_names)
+                                writer.writeheader()
+                        print("Option_data_file_present")
+                        with open(file_name,mode = 'a',newline= '') as file:
+                            print("Entered_Writing_LOOP")
+                            print("In the LOOP\n")
+                            print(result)
                             writer = csv.DictWriter(file,fieldnames = field_names)
-                            writer.writeheader()
-                    print("Option_data_file_present")
-                    with open(file_name,mode = 'a',newline= '') as file:
-                        print("Entered_Writing_LOOP")
-                        print("In the LOOP\n")
-                        print(result)
-                        writer = csv.DictWriter(file,fieldnames = field_names)
-                        writer.writerow(result)
+                            writer.writerow(result)
             except TimeoutError:
                 await ws.send(r_json)
             continue
