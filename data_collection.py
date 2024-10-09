@@ -35,7 +35,7 @@ if today_date not in [i for i in os.listdir() if os.path.isdir(i)]:
     os.mkdir(today_date)
 os.chdir(today_date)
 
-underlyings = ['BANKNIFTY']
+underlyings = ['NIFTY','BANKNIFTY']
 # underlyings = list(security_ids.keys())
 
 print("\nUnderlyings Selected are as Follows")
@@ -153,7 +153,10 @@ async def get_data(client_id,access_token):
                     print(result)
                     writer = csv.DictWriter(file,fieldnames = field_names)
                     writer.writerow(result)
-            
+
 
 if sys.argv[1] == 'collect':
     asyncio.run(get_data(client_id=client_id,access_token=access_token))
+
+
+
